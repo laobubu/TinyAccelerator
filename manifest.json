@@ -1,0 +1,35 @@
+{
+	"manifest_version": 2,
+	"name": "__MSG_extName__",
+	"description": "__MSG_extDesc__",
+	"version": "1.0.0",
+	"icons": {
+		"128": "logo.png"
+	},
+	"options_page": "config.html",
+	"permissions": [
+		"<all_urls>",
+		"storage"
+	],
+	"default_locale": "en",
+	"content_scripts": [
+		{
+			"matches": [
+				"<all_urls>"
+			],
+			"js": [
+				"cs/script.js"
+			]
+		}
+	],
+	"web_accessible_resources": [
+		"box/*",
+		"logo.png"
+	],
+	"background": {
+		"scripts": [
+			"background.js"
+		],
+		"persistent": true //reloading is a disaster
+	}
+}
