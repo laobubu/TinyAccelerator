@@ -1,0 +1,14 @@
+{
+  "name": "tiny-acclerator",
+  "version": "1.0.0",
+  "description": "a chrome ext",
+  "main": "Gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chrome"
+  ],
+  "author": "laobubu",
+  "license": "MIT"
+}

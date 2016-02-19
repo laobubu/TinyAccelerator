@@ -1,1 +1,4 @@
 typings/
+node_modules/
+dist/
+misc/
