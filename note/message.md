@@ -1,3 +1,7 @@
-## box
+## Box Related
 
- - `box.style` get the (system + user) css text
+### box
+
+retrive the html and css data of the box.
+
+recv `{ html: string, style: string }`
