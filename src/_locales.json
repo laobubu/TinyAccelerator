@@ -1,0 +1,9 @@
+{
+	"extName": {
+		"en": "TinyAccelerator",
+		"description": "Extension name"
+	},
+	"extDesc": {
+		"en": "Select a word and do action quickly"
+	}
+}
