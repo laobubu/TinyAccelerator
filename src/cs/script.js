@@ -91,6 +91,7 @@
 
 	document.addEventListener('selectionchange', onSelectionChange, true)
 	window.addEventListener('resize', setBoxPosition, false)
+	document.addEventListener('transitionend', setBoxPosition, true)
 
 	setBoxVisibility(false)
 	window.tabox = box
