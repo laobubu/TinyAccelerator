@@ -2,7 +2,10 @@
 
 (() => {
 	var container = document.createElement('div');
-	var box = container;
+	var box = {
+		visible: false,
+		div: container
+	};
 	var root = container.createShadowRoot();
 
 	chrome.runtime.sendMessage("box", (box_info) => {
@@ -15,17 +18,43 @@
 			root.appendChild(container.firstChild)
 		}
 
-		document.body.appendChild(container);
-		box = root.querySelector('#box');
+		document.body.insertBefore(container, document.body.firstChild);
+		box.div = root.querySelector('#box');
 	})
 
 	var selection = window.getSelection();
 	var tempDiv = document.createElement('div');
 
-	function onSelectionChange() {
-		if (selection.isCollapsed || !selection.rangeCount) return;
+	container.style.position = 'absolute'
+	function setBoxVisibility(visibile) {
+		if (visibile === box.visible) return
+		box.visible = visibile
 
-		var range = selection.getRangeAt(0);
+		container.style.display = visibile ? 'block' : 'none'
+		if (visibile) {
+			setBoxPosition()
+		}
+	}
+	function setBoxPosition() {
+		if (!box.visible) return
+
+		var range = selection.getRangeAt(0)
+
+		var rects = range.getClientRects()
+		var rect = rects[rects.length - 1]
+
+		container.style.left = (rect.left + document.body.scrollLeft) + 'px'
+		container.style.top = (rect.top + document.body.scrollTop) + 'px'
+	}
+
+	function onSelectionChange() {
+		var range = selection.rangeCount && selection.getRangeAt(0);
+		
+		if (selection.isCollapsed) {
+			setBoxVisibility(range && (range.startContainer.childNodes[range.startOffset] === container) || false);
+			return;
+		}
+
 		var content = range.cloneContents();
 
 		tempDiv.innerHTML = '';
@@ -34,15 +63,12 @@
 		var html = tempDiv.innerHTML;
 		var text = tempDiv.innerText;
 
-		var rects = range.getClientRects();
-		var rect = rects[rects.length - 1];
-
-		box.style.position = 'absolute';
-		box.style.left = (rect.left + document.body.scrollLeft) + 'px';
-		box.style.top = (rect.top + document.body.scrollTop - box.offsetHeight) + 'px';
+		setBoxVisibility(true);
+		setBoxPosition()
 	}
 
-	console.log(box)
-
-	document.addEventListener('selectionchange', onSelectionChange, false);
+	document.addEventListener('selectionchange', onSelectionChange, true)
+	window.addEventListener('resize', setBoxPosition, false)
+	
+	window.tabox = box
 })();
