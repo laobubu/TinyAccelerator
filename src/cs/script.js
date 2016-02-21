@@ -1,29 +1,29 @@
 'use strict';
 
 (() => {
-	var container = document.createElement('div');
+	var container = document.createElement('div')
 	var box = {
-		visible: false,
+		visible: true,
 		div: container
-	};
-	var root = container.createShadowRoot();
+	}
+	var root = container.createShadowRoot()
 
 	chrome.runtime.sendMessage("box", (box_info) => {
-		var style = document.createElement('style');
-		style.textContent = box_info.style;
-		root.appendChild(style);
+		var style = document.createElement('style')
+		style.textContent = box_info.style
+		root.appendChild(style)
 
-		container.innerHTML = box_info.html;
+		container.innerHTML = box_info.html
 		while (container.firstChild) {
 			root.appendChild(container.firstChild)
 		}
 
-		document.body.insertBefore(container, document.body.firstChild);
-		box.div = root.querySelector('#box');
+		document.body.appendChild(container)
+		box.div = root.querySelector('#box')
 	})
 
-	var selection = window.getSelection();
-	var tempDiv = document.createElement('div');
+	var selection = window.getSelection()
+	var tempDiv = document.createElement('div')
 
 	container.style.position = 'absolute'
 	function setBoxVisibility(visibile) {
@@ -48,27 +48,28 @@
 	}
 
 	function onSelectionChange() {
-		var range = selection.rangeCount && selection.getRangeAt(0);
+		var range = selection.rangeCount && selection.getRangeAt(0)
 		
 		if (selection.isCollapsed) {
-			setBoxVisibility(range && (range.startContainer.childNodes[range.startOffset] === container) || false);
-			return;
+			setBoxVisibility(range && (range.startContainer.childNodes[range.startOffset] === container) || false)
+			return
 		}
 
-		var content = range.cloneContents();
+		var content = range.cloneContents()
 
-		tempDiv.innerHTML = '';
-		tempDiv.appendChild(content);
+		tempDiv.innerHTML = ''
+		tempDiv.appendChild(content)
 
-		var html = tempDiv.innerHTML;
-		var text = tempDiv.innerText;
+		var html = tempDiv.innerHTML
+		var text = tempDiv.innerText
 
-		setBoxVisibility(true);
+		setBoxVisibility(true)
 		setBoxPosition()
 	}
 
 	document.addEventListener('selectionchange', onSelectionChange, true)
 	window.addEventListener('resize', setBoxPosition, false)
 	
+	setBoxVisibility(false)
 	window.tabox = box
 })();
