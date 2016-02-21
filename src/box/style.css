@@ -1,7 +1,75 @@
 #box {
-	padding: 2pt;
 	font-family: sans-serif;
 	font-size: 10pt;
-	box-shadow: 0 1px 2px #000;
+	
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
 	background-color: #FFF;
+	color: #000;
+	
+	box-sizing: content-box;
+	max-width: 200pt;
+	max-height: 100pt;
+	
+	position: absolute;
+	z-index: 2147483647;
+	left: 0;
+	bottom: 0;
+	
+	display: flex;
+	flex-direction: column;
+}
+
+#box.vertical-reverse {
+	flex-direction: column-reverse;
+	bottom: initial;
+	top: 0;
+}
+
+#text {
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 8pt;
+	border: none;
+	background: #EEE;
+	color: #666;
+	outline: none;
+	padding: 0pt 4pt;
+	height: 0pt;
+	transition: .3s;
+}
+
+#box:hover #text, #box:active #text{
+	flex-shrink: 0;
+	height: 16pt;
+	line-height: 16pt;
+	padding: 2pt 4pt;
+}
+
+#view {
+	overflow: auto;
+	flex-grow: 1;
+}
+
+#entry {
+	flex-shrink: 0;
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.entry-btn {
+	flex: initial;
+	display: block;
+	margin: 0;
+	padding: 4pt 0;
+	box-sizing: border-box;
+	width: 45pt;
+	text-align: center;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.entry-btn.active {
+	background: #333;
+	box-shadow: 0 1px 5px #000 inset;
+	color: #EEE;
 }
