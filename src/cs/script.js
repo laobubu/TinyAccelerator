@@ -90,6 +90,16 @@
 	}
 
 	document.addEventListener('selectionchange', onSelectionChange, true)
+	document.body.addEventListener('mousedown', (ev) => {
+		if (ev.target !== container)
+			box.div.classList.add('ghost')
+	}, true);
+	document.body.addEventListener('mouseup', (ev) => {
+		if (ev.target !== container) {
+			//start key search
+		}
+		box.div.classList.remove('ghost')
+	}, true);
 	window.addEventListener('resize', setBoxPosition, false)
 	document.addEventListener('transitionend', setBoxPosition, true)
 

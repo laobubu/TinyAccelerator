@@ -18,6 +18,14 @@
 	
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
+	
+	transition: opacity .4s;
+}
+
+#box.ghost {
+	opacity: 0;
+	pointer-events: none;
 }
 
 #box.vertical-reverse {
