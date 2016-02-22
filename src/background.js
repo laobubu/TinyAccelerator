@@ -58,3 +58,34 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 			break;
 	}
 })
+
+////////////////////////////////////////////////////////////////////////////
+
+var mods = {};
+
+function handleConnection(port) {
+	var inited = false;
+	function onetimeCheck(message) {
+		if (inited) return
+
+		if (message.type !== 'profile') {
+			port.disconnect()
+			return
+		}
+
+		inited = true
+
+		var profile = message.profile
+		var id = port.sender.id + profile.name
+
+		mods[id] = {
+			id: id,
+			port: port,
+			profile: profile
+		}
+	}
+	port.onMessage.addListener(onetimeCheck)
+}
+
+chrome.runtime.onConnect.addListener(handleConnection)
+chrome.runtime.onConnectExternal.addListener(handleConnection)
