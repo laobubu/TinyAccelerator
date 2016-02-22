@@ -7,10 +7,12 @@
  * If you are making a module, this file is useless.
  */
 
-declare var mods : {
+declare var mods: {
 	[id: string]: {
 		id: string,
 		profile: TinyAcc.Profile,
 		port: chrome.runtime.Port
 	}
 }
+
+declare var _profile: TinyAcc.Profile;

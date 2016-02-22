@@ -69,10 +69,12 @@ port.onMessage.addListener(function(msg) {
 	if (msg.type === "request") {
 		var request = msg.request // a InstanceRequest object
 		var instance = __________ // a Instance object
-		port.postMessage({
-			type: "instance",
-			instance: instance
-		})
+		if (instance !== null) {
+			port.postMessage({
+				type: "instance",
+				instance: instance
+			})
+		}
 	}
 	else if (msg.type === "profile") {
 		port.postMessage({
