@@ -92,7 +92,7 @@ chrome.runtime.onConnectExternal.addListener(handleConnection)
 
 
 
-function _monkey_connect(prop) {
+function local_connect(prop) {
 	var c2sListeners = []
 	var s2cListeners = []
 	
