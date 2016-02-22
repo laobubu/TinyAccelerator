@@ -5,5 +5,26 @@
 	},
 	"extDesc": {
 		"en": "Select a word and do action quickly"
+	},
+	
+	
+	"Add": {
+		"zh": "添加"
+	},
+	
+	"disabled": {
+		"zh": "已禁用"
+	},
+	
+	"CONFIG_CENTER": {
+		"en": "Config Center",
+		"zh": "配置中心"
+	},
+	"Mods": {
+		"zh": "模块"
+	},
+	"TIP_MOVE": {
+		"en": "Drag and move items to change the priority",
+		"zh": "你可以拖动以改变优先级"
 	}
 }

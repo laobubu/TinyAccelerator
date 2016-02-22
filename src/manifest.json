@@ -6,7 +6,12 @@
 	"icons": {
 		"128": "logo.png"
 	},
-	"options_page": "config.html",
+	"options_page": "config/index.html",
+	"sandbox": {
+		"pages": [
+			"config/config.html"
+		]
+	},
 	"permissions": [
 		"<all_urls>",
 		"storage"

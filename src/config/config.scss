@@ -1,0 +1,73 @@
+body {
+	font-family: "PingFang SC", "Noto Sans CJK SC", "Microsoft Yahei", "DejaVu Sans", Roboto, sans-serif;
+	font-size: 11pt;
+	line-height: 14pt;
+}
+
+header h1 {
+	font-weight: lighter;
+	font-size: 32pt;
+}
+
+
+/* left side */
+
+#app-select {
+	padding: 10pt;
+	width: 200pt
+}
+
+h2 {
+	color: #666;
+	font-weight: normal;
+	font-size: 16pt;
+	margin: 0;
+}
+
+.mod-btn1 {
+	float: right
+}
+
+#mod-list {
+	list-style: none;
+	margin: 10pt 0;
+	padding: 0;
+}
+
+#mod-list li, #mod-list .sortable-placeholder {
+	height: 22pt;
+	line-height: 22pt;
+	background: #eee;
+	color: #999;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+	padding: 0 5pt;
+}
+#mod-list li .mod-name::after{
+	content: ' (__MSG_disabled__)';
+	font-size: 8pt;
+}
+#mod-list li:hover {
+	background: #fafafa;
+}
+#mod-list .sortable-placeholder {
+	background: #aaa;
+	box-shadow: none;
+}
+#mod-list li input {
+	float: right;
+	vertical-align: middle;
+	height: 12pt;
+	width: 12pt;
+	margin-top: 5pt;
+	display: none;
+}
+#mod-list li:hover input {
+	display: initial;
+}
+#mod-list li input:checked ~ .mod-name{
+	color: #000;
+}
+#mod-list li input:checked ~ .mod-name::after{
+	content: '';
+}

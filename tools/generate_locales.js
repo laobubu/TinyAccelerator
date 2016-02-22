@@ -25,20 +25,25 @@ for (let key in source) {
 	var phase_meta = {};
 
 	phase['description'] && (phase_meta['description'] = phase['description'])
+	if (!phase['en']) {
+		phase['en'] = key
+	}
+	key = key.replace(/ /g, '_')
 
 	for (let lang in phase) {
 		if (lang === 'description') continue;
 		output[lang] || (output[lang] = {});
-		output[lang][key] = Object.assign(phase_meta, { message: phase[lang] });
+		output[lang][key] = { message: phase[lang] };
+		// console.log(`Found ${lang} for ${key}: ${phase[lang]}`);
 	}
 }
 
 try { fs.mkdirSync(arg.outdir) } catch (er) { }
 
-for (let lang in output) {
+Object.keys(output).forEach((lang) => {
 	fs.mkdir(path.join(arg.outdir, lang), () => {
 		let filename = path.join(arg.outdir, lang, 'messages.json')
 		let data = JSON.stringify(output[lang])
 		fs.writeFile(filename, data)
 	})
-}
+})
