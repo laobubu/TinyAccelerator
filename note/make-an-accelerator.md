@@ -3,40 +3,63 @@
 
 ## Defines
 
-### Profile (TAcceleratorProfile)
+### Profile
 
-An object that has necessary fields that describe an accelerator.
+An object that has necessary fields that describe an [Module].
 
-### Factory (TAcceleratorFactory)
+### Module
 
-Something able to create an Accelerator Instance when user makes a selection.
+Something able to create [Instance] and provides [Profile] to TinyAccelerator.
 
-### Accelerator Instance (TAccelerator)
+Usually it is a Chrome extension.
 
-Created by an Factory object when user makes a selection.
+### Instance
 
-An accelerator is an instance of selection-based service.
+Created by a [Module] when user makes a selection.
 
-## Life cycle
+Its contents vary according to user's selection.
+
+## Workflow
 
 ### When user makes a selection
 
-```flow
-st=>start:      User makes a selection
-op1=>operation: System extracts content
-op2=>operation: Factory.create() creates an instance from the content
-if1=>condition: instance is not null?
-op3=>operation: System makes a button (and a view) for the instance
-op4=>operation: System calls the instance's bind() function
-ed1=>end:       End
-
-st->op1->op2->if1
-if1(yes)->op3->op4->ed1
-if1(no)->ed1
+```sequence
+User->TinyAcc:     Selection
+TinyAcc->Module:   Extracted content
+Note over Module:  Generate corresponding content (*)
+Module->TinyAcc:   Instance
+TinyAcc->User:     Display
 ```
+
+(\*) If can't generate corresponding content, Module may refuse responding System and the flow stops.
 
 ### When content get unselected
 
-The box will be hidden. The view and button that assigned to the accelerator instance, will be removed from the box.
+The box will be hidden. The view and button that assigned to the Instance, will be removed from the box.
 
 The best practice is that not creating more reference to the button or view. Once their content get updated, everything shall be static. Otherwise, GC and memory might have a bad day.
+
+## Implement
+
+### Connect to TinyAccelerator
+
+TinyAccelerator and external modules follow Chrome Message API: <https://developer.chrome.com/extensions/messaging>
+
+When a module starts, it shall make a connection to TinyAccelerator and send its corresponding [Profile].
+
+```javascript
+const TinyAccelerator_ID = "xxxxxxxxxxxxxxxxxxxxxxxx"
+const Profile = {...}
+
+var port = chrome.runtime.connect(TinyAccelerator_ID, {name: Profile.name})
+port.postMessage({
+	type: "profile",
+	profile: Profile
+})
+```
+
+### Respond
+
+When user make a selection, TinyAccelerator will request for an [Instance] via the `port`.
+
+

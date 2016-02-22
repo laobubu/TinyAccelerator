@@ -1,4 +1,6 @@
-interface TAcceleratorProfile {
+declare module TinyAcc{
+
+interface Profile {
 	/** the name of this accelerator */
 	name: string;
 	
@@ -20,33 +22,14 @@ interface TAcceleratorProfile {
 	 * However, if useHTML is true, the `create` will **never** be called when user types the query manually.
 	 */
 	useHTML: boolean;
+}
+
+interface Instance {
+	/** the HTML of the View */
+	view?: string;
 	
-	/**
-	 * tell if this accelerator **might** need a view. 
-	 * 
-	 * - When true, an instance can also refuse using the view.
-	 * - But if false, it will never get the view.
-	 */
-	hasView: boolean;
+	/** the title of button. usually the same as Profile.name */
+	title: string;
 }
 
-interface TAcceleratorFactory {	
-	/** 
-	 * when user created a selection, TinyAcc will use this function to create an instance. 
-	 * 
-	 * If the selected content is not supported, this function shall return `null`
-	 * 
-	 * When TinyAcc gets the instance, the `TAccelerator.bind()` will be called.
-	 */
-	create(selectedContent): TAccelerator;
-}
-
-interface TAccelerator {
-	/** 
-	 * when a TAccelerator is created, TinyAcc will call this function. 
-	 * 
-	 * @param {HTMLElement} button the button assigned to this accelerator. You shall modify its content by adding some text or other stuff.
-	 * @param {HTMLDivElement} view 
-	 */
-	bind(button: HTMLElement, view: HTMLDivElement);
 }
