@@ -62,4 +62,25 @@ port.postMessage({
 
 When user make a selection, TinyAccelerator will request for an [Instance] via the `port`.
 
+The requesting message contains a `request` field, whose type is [InstanceRequest].
+
+```javascript
+port.onMessage.addListener(function(msg) {
+	if (msg.type === "request") {
+		var request = msg.request // a InstanceRequest object
+		var instance = __________ // a Instance object
+		port.postMessage({
+			type: "instance",
+			instance: instance
+		})
+	}
+	else if (msg.type === "profile") {
+		port.postMessage({
+			type: "profile",
+			profile: Profile
+		})
+	}
+})
+```
+
 

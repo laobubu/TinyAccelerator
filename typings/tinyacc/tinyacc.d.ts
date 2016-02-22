@@ -16,12 +16,8 @@ interface Profile {
 	/** the full description. HTML tags are supported. */
 	fullDescription: string;
 	
-	/** 
-	 * true and TinyAcc will pass the HTML, instead of text, of the selected content, to this accelerator.
-	 * 
-	 * However, if useHTML is true, the `create` will **never** be called when user types the query manually.
-	 */
-	useHTML: boolean;
+	/** the 48x48 image URL. base64 URL is supported. */
+	image: string;
 }
 
 interface Instance {
@@ -30,6 +26,23 @@ interface Instance {
 	
 	/** the title of button. usually the same as Profile.name */
 	title: string;
+	
+	/** the id string. given when TinyAcc requests for this instance */
+	id: string;
+}
+
+interface InstanceRequest {
+	/** something Instance shall return as-is */
+	id: string;
+	
+	/** the selected text */
+	text: string;
+	
+	/** the selected HTML */
+	html: string;
+	
+	/** the page URL */
+	url: string;
 }
 
 }
