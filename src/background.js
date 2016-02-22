@@ -89,3 +89,34 @@ function handleConnection(port) {
 
 chrome.runtime.onConnect.addListener(handleConnection)
 chrome.runtime.onConnectExternal.addListener(handleConnection)
+
+
+
+function _monkey_connect(prop) {
+	var c2sListeners = []
+	var s2cListeners = []
+	
+	var portForServer = {
+		name: prop.name,
+		sender: {
+			id: chrome.runtime.id
+		},
+		onMessage: {
+			addListener: (l) => { c2sListeners.push(l) }
+		},
+		postMessage: (msg) => {
+			s2cListeners.forEach(l => l(msg))
+		}
+	}
+	handleConnection(portForServer)
+	
+	var port = {
+		onMessage: {
+			addListener: (l) => { s2cListeners.push(l) }
+		},
+		postMessage: (msg) => {
+			c2sListeners.forEach(l => l(msg))
+		}
+	}
+	return port;
+}
