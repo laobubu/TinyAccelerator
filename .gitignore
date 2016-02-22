@@ -1,4 +1,5 @@
 typings/
+!typings/tinyacc/
 node_modules/
 dist/
 misc/
