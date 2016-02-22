@@ -52,11 +52,9 @@ function UpdateBoxHtml(html) {
 window.fetch('box/box.html').then(res => res.text()).then(UpdateBoxHtml)
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-	if (msg === "box") {
-
-		window.fetch('box/box.html').then(res => res.text()).then(UpdateBoxHtml)
-
-		sendResponse(box);
-
+	switch (msg) {
+		case "box":
+			sendResponse(box);
+			break;
 	}
 })
