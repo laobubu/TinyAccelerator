@@ -1,11 +1,11 @@
 
-# Making an Accelerator
+# Making a Module
 
 ## Defines
 
 ### Profile
 
-An object that has necessary fields that describe an [Module].
+An object that has necessary fields that describe a [Module].
 
 ### Module
 

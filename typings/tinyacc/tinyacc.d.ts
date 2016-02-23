@@ -20,12 +20,20 @@ interface Profile {
 	image: string;
 }
 
+type EventInfo = { [eventName: string]: string };
+
 interface Instance {
 	/** the HTML of the View */
 	view?: string;
 	
-	/** the title of button. usually the same as Profile.name */
-	title: string;
+	/** the entry button on #entry */
+	button: {
+		/** the text on the button. if empty, the button will be hidden */
+		text?: string;
+		
+		/** the event handler function bodies */
+		event?: EventInfo;
+	}
 	
 	/** the id string. given when TinyAcc requests for this instance */
 	id: string;
