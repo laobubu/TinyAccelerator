@@ -20,6 +20,11 @@ interface Profile {
 	image: string;
 }
 
+/** 
+ * The event handlers
+ * 
+ * @see /note/make-a-instance.md
+ */
 type EventInfo = { [eventName: string]: string };
 
 interface Instance {
