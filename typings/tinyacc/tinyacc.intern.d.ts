@@ -14,5 +14,3 @@ declare var mods: {
 		port: chrome.runtime.Port
 	}
 }
-
-declare var _profile: TinyAcc.Profile;

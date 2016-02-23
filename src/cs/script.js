@@ -1,6 +1,6 @@
 'use strict';
 
-(() => {
+(function () {
 	var container = document.createElement('div')
 	var box = {
 		visible: true,
