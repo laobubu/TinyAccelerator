@@ -42,8 +42,7 @@ Promise.all([
 
 function UpdateBoxHtml(html) {
 	var h =
-		html.replace(/<!--discard-->.+/g, '') //just for debug...
-			.replace(/(src|href)=(["'])(.+?)\2/g, (whole, a, quote, uri) => {
+		html.replace(/(src|href)=(["'])(.+?)\2/g, (whole, a, quote, uri) => {
 				if (/^\w+\:/.test(uri)) return whole;
 				return a + '=' + quote + chrome.runtime.getURL((uri[0] === "/" ? uri : "/box/" + uri)) + quote;
 			})
