@@ -51,6 +51,7 @@
 
 	&:hover, &:active{
 		opacity: 1;
+		transition: opacity .1s;
 		
 		#text {
 			height: 16pt;
