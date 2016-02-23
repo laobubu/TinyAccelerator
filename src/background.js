@@ -43,9 +43,9 @@ Promise.all([
 function UpdateBoxHtml(html) {
 	var h =
 		html.replace(/(src|href)=(["'])(.+?)\2/g, (whole, a, quote, uri) => {
-				if (/^\w+\:/.test(uri)) return whole;
-				return a + '=' + quote + chrome.runtime.getURL((uri[0] === "/" ? uri : "/box/" + uri)) + quote;
-			})
+			if (/^\w+\:/.test(uri)) return whole;
+			return a + '=' + quote + chrome.runtime.getURL((uri[0] === "/" ? uri : "/box/" + uri)) + quote;
+		})
 	box.html = h;
 }
 window.fetch('box/box.html').then(res => res.text()).then(UpdateBoxHtml)
@@ -60,28 +60,50 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ////////////////////////////////////////////////////////////////////////////
 
-var mods = {};
+var enabled_mods = [] //a list of mod ID
+var loaded_mods = {}  //a dict
+
+function handleModuleResponse(msg) {
+	if (msg.type === "instance") {
+		console.log("module response!", msg)
+		var infos = msg.instance.id.split("|") // 0: portID 1: reqID 2: order
+		var port = port_cs[infos[0]]
+		if (!port) return
+		port.postMessage({
+			id: infos[1],
+			order: ~~infos[2],
+			instance: msg.instance
+		})
+	}
+}
 
 function handleConnection(port) {
 	var inited = false;
 	function onetimeCheck(message) {
 		if (inited) return
+		inited = true
 
 		if (message.type !== 'profile') {
-			port.disconnect()
+			if (port.sender.id !== chrome.runtime.id)
+				port.disconnect()
 			return
 		}
-
-		inited = true
 
 		var profile = message.profile
 		var id = port.sender.id + profile.name
 
-		mods[id] = {
+		loaded_mods[id] = {
 			id: id,
 			port: port,
 			profile: profile
 		}
+
+		enabled_mods.push(id) //debug
+		
+		port.onMessage.addListener(handleModuleResponse)
+		port.onDisconnect.addListener(() => {
+			delete loaded_mods[id]
+		})
 	}
 	port.onMessage.addListener(onetimeCheck)
 }
@@ -94,7 +116,7 @@ chrome.runtime.onConnectExternal.addListener(handleConnection)
 function local_connect(prop) {
 	var c2sListeners = []
 	var s2cListeners = []
-	
+
 	var portForServer = {
 		name: prop.name,
 		sender: {
@@ -103,12 +125,15 @@ function local_connect(prop) {
 		onMessage: {
 			addListener: (l) => { c2sListeners.push(l) }
 		},
+		onDisconnect: {
+			addListener: (l) => { }
+		},
 		postMessage: (msg) => {
 			s2cListeners.forEach(l => l(msg))
 		}
 	}
 	handleConnection(portForServer)
-	
+
 	var port = {
 		onMessage: {
 			addListener: (l) => { s2cListeners.push(l) }
@@ -119,3 +144,33 @@ function local_connect(prop) {
 	}
 	return port;
 }
+
+
+
+//////////////////////////////////THIS PART IS FOR CONTENT SCRIPTS
+
+var port_cs = {} //ports that content script created
+
+chrome.runtime.onConnect.addListener((port) => {
+	var portID = port.name
+	if (!portID.startsWith("tinyacc+")) return
+	port_cs[portID] = port
+
+	port.onDisconnect.addListener(() => {
+		delete port_cs[portID]
+	})
+	port.onMessage.addListener((msg) => {
+		enabled_mods.forEach((mod_id, index) => {
+			var mod = loaded_mods[mod_id]
+			var instanceRequest = Object.assign(msg.info, {
+				id: (portID + "|" + msg.id + "|" + index)
+			})
+			if (!mod) return
+
+			mod.port.postMessage({
+				type: "request",
+				request: instanceRequest
+			})
+		})
+	})
+})

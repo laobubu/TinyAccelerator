@@ -1,3 +1,7 @@
+## Internal messages
+
+These messages are not public
+
 ## Box Related
 
 ### box

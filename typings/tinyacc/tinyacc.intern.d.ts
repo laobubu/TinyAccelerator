@@ -7,7 +7,7 @@
  * If you are making a module, this file is useless.
  */
 
-declare var mods: {
+declare var loaded_mods: {
 	[id: string]: {
 		id: string,
 		profile: TinyAcc.Profile,

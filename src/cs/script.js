@@ -4,7 +4,8 @@
 	var container = document.createElement('div')
 	var box = {
 		visible: true,
-		div: container
+		div: container,
+		surroundingRects: null
 	}
 	var root = container.createShadowRoot()
 
@@ -38,9 +39,7 @@
 	function setBoxPosition() {
 		if (!box.visible) return
 
-		var range = selection.getRangeAt(0)
-
-		var rects = range.getClientRects()
+		var rects = box.surroundingRects
 		var rect = rects[rects.length - 1]
 
 		var left = rect.left
@@ -83,10 +82,40 @@
 		var html = tempDiv.innerHTML
 		var text = tempDiv.innerText.trim()
 
-		if (!text.length) return;
+		if (!text.length) return
 
+		box.surroundingRects = range.getClientRects()
 		setBoxVisibility(true)
 		setBoxPosition()
+
+		var request = {
+			id: genID(),
+			info: {
+				text: text,
+				html: html,
+				url: window.location.href
+			}
+		}
+		console.log("request", request)
+
+		port.postMessage(request)
+	}
+
+	var port = chrome.runtime.connect({ name: genID() })
+	port.onDisconnect.addListener(() => {
+		console.log('fuck')
+	})
+	port.onMessage.addListener((msg) => {
+		// if (msg.id !== currentID) return
+		console.log('recv', msg)
+		// console.log("recv instance", msg.instance)
+	})
+
+	var currentID = ""
+	var genIDCounter = 0
+	function genID() {
+		currentID = "tinyacc+" + genIDCounter++ + +new Date()
+		return currentID
 	}
 
 	document.addEventListener('selectionchange', onSelectionChange, true)
@@ -99,9 +128,7 @@
 			//start key search
 		}
 		box.div.classList.remove('ghost')
-	}, true);
-	window.addEventListener('resize', setBoxPosition, false)
-	document.addEventListener('transitionend', setBoxPosition, true)
+	}, true)
 
 	setBoxVisibility(false)
 	window.tabox = box
