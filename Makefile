@@ -39,5 +39,8 @@ $(foreach scss, $(FILES_SCSS), $(eval $(call dynamic-bind, $(SRC_DIR)/$(scss), $
 $(DST_FILES_SCSS): 
 	node-sass --output-style compressed $< $@
 
+$(DST_DIR)/%.html: $(SRC_DIR)/%.html
+	>$@ grep -vP '^<!--discard-->' $<
+
 $(DST_DIR)/%: $(SRC_DIR)/%
 	@[ -f $< ] && cp -R $< $@ || mkdir -p $@
