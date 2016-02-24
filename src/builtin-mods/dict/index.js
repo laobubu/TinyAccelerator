@@ -3,15 +3,14 @@
 function ModsDict() {
 
 	var _profile = {}
+	
+	var btn = chrome.i18n.getMessage("Dict")
 
 	_profile.id = "dict"
-	_profile.name = "Dict"
+	_profile.name = chrome.i18n.getMessage("Dictionary")
 	_profile.author = "laobubu"
-	_profile.description = "A simple dictionary provider"
-	_profile.fullDescription =
-	`
-A dictionary using [Youdao Open API](http://fanyi.youdao.com/openapi?path=data-mode), providing translation between Chinese and English.
-`
+	_profile.description = chrome.i18n.getMessage("DICT_DESCRIPT")
+	_profile.fullDescription = chrome.i18n.getMessage("DICT_DESCRIPT_FULL")
 
 	function _create_instance(req) {
 		return new Promise((resolve) => {
@@ -35,7 +34,7 @@ A dictionary using [Youdao Open API](http://fanyi.youdao.com/openapi?path=data-m
 						id: req.id,
 						view: view,
 						button: {
-							text: "Dict",
+							text: btn,
 							event: {
 								click: `window.open("http://dict.cn/${encodeURIComponent(req.text) }")`
 							}

@@ -11,6 +11,9 @@
 	"Add": {
 		"zh": "添加"
 	},
+	"Author": {
+		"zh": "作者"
+	},
 	
 	"disabled": {
 		"zh": "已禁用"
@@ -36,5 +39,31 @@
 	"TIP_MOVE": {
 		"en": "Drag and move items to change the priority",
 		"zh": "你可以拖动以改变优先级"
+	},
+	
+	
+	
+	
+	"Dict": {
+		"zh": "查词"
+	},
+	"Dictionary": {
+		"zh": "词典"
+	},
+	"DICT_DESCRIPT": {
+		"en": "A simple dictionary using Youdao API",
+		"zh": "一个使用有道词典API实现的词典"
+	},
+	"DICT_DESCRIPT_FULL": {
+		"en": "A dictionary using [Youdao Open API](http://fanyi.youdao.com/openapi?path=data-mode), providing translation from English to Chinese.",
+		"zh": "一个使用[有道词典API](http://fanyi.youdao.com/openapi?path=data-mode)实现的词典，能够将选中的英文词汇翻译为中文。"
+	},
+	
+	"Search": {
+		"zh": "搜索"
+	},
+	"SEARCH_DESCRIPT": {
+		"en": "Universal search provider",
+		"zh": "通用的搜索按钮"
 	}
 }

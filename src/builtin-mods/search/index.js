@@ -5,16 +5,16 @@ function ModsSearch() {
 	var _profile = {}
 
 	_profile.id = "search"
-	_profile.name = "Search"
+	_profile.name = chrome.i18n.getMessage("Search")
 	_profile.author = "laobubu"
-	_profile.description = "universal search provider"
+	_profile.description = chrome.i18n.getMessage("SEARCH_DESCRIPT")
 
 	function _create_instance(req) {
 		return {
 			id: req.id,
 			// view: ("your selection is " + req.text),
 			button: {
-				text: "Search",
+				text: chrome.i18n.getMessage("Search"),
 				event: {
 					click: `window.open("https://www.google.com/search?q=${encodeURIComponent(req.text)}")`
 				}
