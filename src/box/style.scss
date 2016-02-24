@@ -94,4 +94,10 @@
 		bottom: initial;
 		top: 0;
 	}
+	
+	&.horizontal-reverse {
+		#entry {
+			flex-direction: row-reverse;
+		}
+	}
 }
