@@ -13,7 +13,10 @@ function ModsSearch() {
 			id: req.id,
 			view: ("your selection is " + req.text),
 			button: {
-				text: "Search"
+				text: "Search",
+				event: {
+					click: `window.open("https://www.google.com/search?q=${encodeURIComponent(req.text)}")`
+				}
 			}
 		}
 	}

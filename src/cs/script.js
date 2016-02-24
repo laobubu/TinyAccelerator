@@ -125,6 +125,12 @@
 		parent.insertBefore(ele, insertBefore)
 	}
 
+	function monodrama(ele) {
+		[].every.call(ele.parent.children, (child) => {
+			child.style.display = (child === ele) ? "block" : "none"
+		})
+	}
+
 	var port = chrome.runtime.connect({ name: genID() })
 	port.onDisconnect.addListener(() => {
 		console.log('fuck')
@@ -137,17 +143,36 @@
 		var ins = msg.instance
 		var order = msg.order
 
-		var viewContent = document.createElement('div')
-		viewContent.className = "view-content"
-		viewContent.setAttribute("tinyacc-instance", ins.id)
-		viewContent.innerHTML = ins.view
-		insertOrdered(viewContent, box.view, order)
+		if (ins.view) {
+			var viewContent = document.createElement('div')
+			viewContent.className = "view-content"
+			viewContent.setAttribute("tinyacc-instance", ins.id)
+			viewContent.innerHTML = ins.view
+			insertOrdered(viewContent, box.view, order)
+		}
 
-		var entryButton = document.createElement('div')
-		entryButton.className = "entry-btn"
-		entryButton.setAttribute("tinyacc-instance", ins.id)
-		entryButton.textContent = ins.button.text
-		insertOrdered(entryButton, box.entry, order)
+		if (ins.button.text) {
+			var entryButton = document.createElement('div')
+			entryButton.className = "entry-btn"
+			entryButton.setAttribute("tinyacc-instance", ins.id)
+			entryButton.textContent = ins.button.text
+			insertOrdered(entryButton, box.entry, order)
+
+			let event = ins.button.event
+			if (event) {
+				Object.keys(event).forEach((eventName) => {
+					let eventBody = event[eventName]
+					let eventHandler = new Function("event", eventBody)
+					entryButton.addEventListener(eventName, eventHandler)
+				})
+			}
+
+			if (viewContent) {
+				entryButton.addEventListener("mouseenter", (ev) => {
+					monodrama(viewContent)
+				})
+			}
+		}
 	})
 
 	var currentID = ""
