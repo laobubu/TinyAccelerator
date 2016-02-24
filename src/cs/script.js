@@ -168,14 +168,6 @@
 		var ins = msg.instance
 		var order = msg.order
 
-		if (ins.view) {
-			var viewContent = document.createElement('div')
-			viewContent.className = "view-content"
-			viewContent.setAttribute("tinyacc-instance", ins.id)
-			viewContent.innerHTML = ins.view
-			insertOrdered(viewContent, box.view, order)
-		}
-
 		if (ins.button.text) {
 			var entryButton = document.createElement('div')
 			entryButton.className = "entry-btn"
@@ -191,12 +183,26 @@
 					entryButton.addEventListener(eventName, eventHandler)
 				})
 			}
+		}
 
-			if (viewContent) {
+		if (ins.view) {
+			var viewContent = document.createElement('div')
+			viewContent.className = "view-content"
+			viewContent.setAttribute("tinyacc-instance", ins.id)
+			viewContent.innerHTML = ins.view
+
+			if (entryButton) {
+				//if have a button and order num is large, then hide the view 
+				if (box.view.firstElementChild && box.view.firstElementChild.getAttribute("order") < order) {
+					viewContent.style.display = "none"
+				}
+				
 				entryButton.addEventListener("mouseenter", (ev) => {
 					monodrama(viewContent)
 				})
 			}
+			
+			insertOrdered(viewContent, box.view, order)
 		}
 	})
 
