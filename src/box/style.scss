@@ -1,5 +1,5 @@
 #box {
-	font-family: sans-serif;
+	font-family: "PingFang SC", "Noto Sans CJK SC", "Microsoft Yahei", "DejaVu Sans", Roboto, Arial, sans-serif;
 	font-size: 10pt;
 	
 	border: 1px solid rgba(0, 0, 0, 0.6);
@@ -82,4 +82,21 @@
 			flex-direction: row-reverse;
 		}
 	}
+}
+
+h1,h2,h3,p {
+	margin-top: 0.4em;
+	margin-bottom: 0.4em;
+	line-height: 1.2em;
+}
+ul,ol{
+	margin: 0 0.4em;
+	padding: 0;
+	padding-left: 2em;
+}
+h1 {
+	font-size: 150%;
+}
+h2 {
+	font-size: 120%;
 }
