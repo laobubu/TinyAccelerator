@@ -39,7 +39,8 @@
 	"background": {
 		"scripts": [
 			"background.js",
-			"builtin-mods/search/index.js"
+			"builtin-mods/search/index.js",
+			"builtin-mods/dict/index.js"
 		],
 		"persistent": true //reloading is a disaster
 	}
