@@ -1,17 +1,25 @@
 'use strict'
 
-var translateTodo = {}
+var translateTodo = []
+var afterTranslate
 
 function uniTranslateAll() {
 	var x = document.querySelectorAll('[i18n]');
+	var keys = {}
 	for (var i = x.length; --i !== -1;) {
-		translateTodo[i] = x[i]
-		window.postMessage({
-			type: "i18n?",
-			key: x[i].textContent.replace(/ /g, '_'),
-			target: i
-		}, "*")
+		let key = x[i].textContent.replace(/ /g, '_')
+		keys[key] = true
+		translateTodo.push({
+			key: key,
+			target: x[i]
+		})
 	}
+	window.postMessage({
+		type: "i18n?",
+		keys: Object.keys(keys)
+	}, "*")
+
+	return new Promise((resolve) => { afterTranslate = resolve })
 }
 
 window.addEventListener('message', function (event) {
@@ -20,8 +28,10 @@ window.addEventListener('message', function (event) {
 
 	switch (type) {
 		case 'i18n!':
-			translateTodo[d.target].textContent = d.text
-			delete translateTodo[d.target]
+			translateTodo.forEach((item) => {
+				item.target.textContent = d.texts[item.key]
+			})
+			afterTranslate()
 			break
 		case 'sm!':
 			let func = sendMessage_resolvers[d.timestamp]
@@ -44,4 +54,8 @@ function sendMessage(message) {
 	})
 }
 
-uniTranslateAll();
+uniTranslateAll().then(() => {
+	var script = document.createElement('script')
+	script.src = "config.js"
+	document.body.appendChild(script)
+})
