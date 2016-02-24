@@ -4,8 +4,14 @@
 	var container = document.createElement('div')
 	var box = {
 		visible: true,
+		/** the `#box` element */
 		div: container,
-		surroundingRects: null
+		/** the `#view` element */
+		view: container,
+		/** the `#entry` element */
+		entry: container,
+		
+		surroundingRects: []
 	}
 	var root = container.createShadowRoot()
 
@@ -21,6 +27,8 @@
 
 		document.body.appendChild(container)
 		box.div = root.querySelector('#box')
+		box.view = root.querySelector('#view')
+		box.entry = root.querySelector('#entry')
 	})
 
 	var selection = window.getSelection()
@@ -84,6 +92,8 @@
 
 		if (!text.length) return
 
+		box.view.innerHTML = ""
+		box.entry.innerHTML = ""
 		box.surroundingRects = range.getClientRects()
 		setBoxVisibility(true)
 		setBoxPosition()
@@ -97,8 +107,19 @@
 			}
 		}
 		console.log("request", request)
-
+		
 		port.postMessage(request)
+	}
+
+	function insertOrdered(ele, parent, order) {
+		var insertBefore = null;
+		[].every.call(parent.children, (cmp) => {
+			var cmpOrder = ~~cmp.getAttribute("order")
+			if (cmpOrder > order) insertBefore = cmp
+			return (insertBefore === null)
+		})
+		ele.setAttribute("order", order)
+		parent.insertBefore(ele, insertBefore)
 	}
 
 	var port = chrome.runtime.connect({ name: genID() })
@@ -106,9 +127,24 @@
 		console.log('fuck')
 	})
 	port.onMessage.addListener((msg) => {
-		// if (msg.id !== currentID) return
-		console.log('recv', msg)
-		// console.log("recv instance", msg.instance)
+		console.log('current id is ' + currentID + ' got ' + msg.id);
+
+		if (msg.id != currentID) return
+		
+		var ins = msg.instance
+		var order = msg.order
+
+		var viewContent = document.createElement('div')
+		viewContent.className = "view-content"
+		viewContent.setAttribute("tinyacc-instance", ins.id)
+		viewContent.innerHTML = ins.view
+		insertOrdered(viewContent, box.view, order)
+
+		var entryButton = document.createElement('div')
+		entryButton.className = "entry-btn"
+		entryButton.setAttribute("tinyacc-instance", ins.id)
+		entryButton.textContent = ins.button.text
+		insertOrdered(entryButton, box.entry, order)
 	})
 
 	var currentID = ""
@@ -131,5 +167,4 @@
 	}, true)
 
 	setBoxVisibility(false)
-	window.tabox = box
 })();
