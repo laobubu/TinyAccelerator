@@ -3,6 +3,10 @@
 
 ## Defines
 
+Just a simple introducing of interfaces declared in the [Typedefined File]
+
+[Typedefined File]: ../typings/tinyacc/tinyacc.d.ts
+
 ### Profile
 
 An object that has necessary fields that describe a [Module].
