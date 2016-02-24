@@ -56,12 +56,6 @@ h2 {
 			font-size: 8pt;
 		}
 		
-		.mod-unavailable {
-			font-size: 8pt;
-			color: #999;
-			float: right;
-		}
-		
 		input {
 			float: right;
 			vertical-align: middle;
@@ -75,6 +69,13 @@ h2 {
 				&:after{
 					content: '';
 				}
+			}
+		}
+		
+		&.mod-unavailable .mod-name {
+			color: #999 !important;
+			&::after {
+				content: ' (__MSG_unavailable__)' !important;
 			}
 		}
 
