@@ -14,14 +14,15 @@ h2 {
 	color: #666;
 	font-weight: normal;
 	font-size: 16pt;
-	margin: 0;
 }
 
 .float-right {
 	float: right
 }
 
-
+img {
+	vertical-align: middle;
+}
 
 
 
@@ -37,13 +38,28 @@ h2 {
 	top: 0;
 	width: 100%;
 	height: 100%;
+	
+	> * {
+		padding: 20pt;
+		overflow: auto;
+	}
 }
 
 #app-select {
-	padding: 20pt;
 	width: 25%;
 	min-width: 200pt;
-	overflow-y: auto;
+	
+	h2 {
+		margin: 0;
+	}
+}
+
+#app-detail {
+	flex-grow: 1;
+	
+	.mod-meta {
+		border-spacing: 5pt;
+	}
 }
 
 #mod-list {

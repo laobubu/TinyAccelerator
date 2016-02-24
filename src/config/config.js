@@ -11,8 +11,11 @@ var app = {
 			{ name: 'Lorem', id: "wgwrgwrgw", enabled: true }
 		]
 	},
-	loaded_mods: {}
+	loaded_mods: {},
+	current_mod: null
 }
+
+Vue.config.debug = true
 
 app = new Vue({
 	el: '#app',
@@ -20,7 +23,11 @@ app = new Vue({
 	methods: {
 		showMod: function (index) {
 			var m = app.conf.mods[index]
+			app.current_mod = app.loaded_mods[m.id]
 		}
+	},
+	filters: {
+		marked: marked
 	}
 })
 
@@ -40,3 +47,7 @@ $("#mod-list").sortable({
 
 sendMessage("loaded_mods").then((loaded_mods) => { app.loaded_mods = loaded_mods })
 sendMessage("conf").then((conf) => { app.conf = conf })
+
+setTimeout(function () {
+	document.querySelector('#mod-list li').click()
+}, 200);

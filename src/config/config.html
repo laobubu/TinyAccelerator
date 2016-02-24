@@ -14,7 +14,7 @@
 		<div class="float-right">
 			<button i18n>Add</button>
 		</div>
-		<h2 i18n>Mods</h2>
+		<h2 i18n>Modules</h2>
 		<ul id="mod-list">
 			<li v-for="(index, mod) in conf.mods" v-bind:data-index="index" v-on:click="showMod(index)" v-bind:class="loaded_mods[mod.id] ? '' : 'mod-unavailable'">
 				<input type="checkbox" v-bind:checked="mod.enabled">
@@ -23,9 +23,40 @@
 		</ul>
 		<small i18n>TIP_MOVE</small>
 	</div>
+	
+	<div id="app-detail">
+		<div v-if="current_mod">
+			<h1>
+				<img v-bind:src="current_mod.profile.image || '/image/package-64.png'" alt="" width="64" height="64">
+				{{ current_mod.profile.name }}
+			</h1>
+			<table class="mod-meta">
+				<tr>
+					<th i18n>ID</th>
+					<td>{{ current_mod.id }}</td>
+				</tr>
+				<tr>
+					<th i18n>Author</th>
+					<td>{{ current_mod.profile.author }}</td>
+				</tr>
+				<tr v-show="current_mod.profile.url">
+					<th i18n>URL</th>
+					<td><a v-bind:href="current_mod.profile.url">{{ current_mod.profile.url }}</a></td>
+				</tr>
+			</table>
+			<div class="mod-description">
+				<div v-if="current_mod.profile.fullDescription" v-html="current_mod.profile.fullDescription | marked"></div>
+				<p v-else>{{ current_mod.profile.description }}</p>
+			</div>
+		</div>
+		<div v-else>
+			<h1>NOT FOUND</h1>
+		</div>
+	</div>
 </div>
 
 <script src="../libs/vue/vue.js"></script>
+<script src="../libs/marked/marked.min.js"></script>
 <script src="../libs/jquery-ui/jquery.min.js"></script>
 <script src="../libs/jquery-ui/jquery-ui.min.js"></script>
 <script src="translate.js"></script>

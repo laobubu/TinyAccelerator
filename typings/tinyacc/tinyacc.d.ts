@@ -13,7 +13,7 @@ interface Profile {
 	/** one stentece describes this accelerator. */
 	description: string;
 	
-	/** the full description. HTML tags are supported. */
+	/** the full description. Markdown is supported. */
 	fullDescription: string;
 	
 	/** the 48x48 image URL. base64 URL is supported. */

@@ -24,5 +24,9 @@ declare var loaded_mods: modDictType;
 
 declare var app: {
 	conf: confType,
-	loaded_mods: modDictType
+	loaded_mods: modDictType,
+	current_mod: {
+		id: string,
+		profile: TinyAcc.Profile
+	}
 };

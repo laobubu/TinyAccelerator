@@ -23,9 +23,16 @@
 		"en": "Config Center",
 		"zh": "配置中心"
 	},
-	"Mods": {
+	"Modules": {
 		"zh": "模块"
 	},
+	"Module": {
+		"zh": "模块"
+	},
+	"Name": {
+		"zh": "名字"
+	},
+	
 	"TIP_MOVE": {
 		"en": "Drag and move items to change the priority",
 		"zh": "你可以拖动以改变优先级"
