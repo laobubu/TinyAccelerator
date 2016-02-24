@@ -4,6 +4,7 @@ function ModsDict() {
 
 	var _profile = {}
 
+	_profile.id = "dict"
 	_profile.name = "Dict"
 	_profile.author = "laobubu"
 	_profile.description = "A simple dictionary provider"

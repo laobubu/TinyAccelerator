@@ -1,7 +1,10 @@
 declare module TinyAcc{
 
 interface Profile {
-	/** the name of this accelerator */
+	/** the ID name, like `SearchEngine`, only letters and numbers */
+	id: string;
+	
+	/** the name of this accelerator. i18n */
 	name: string;
 	
 	/** the author's name */

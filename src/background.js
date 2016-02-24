@@ -115,7 +115,7 @@ function handleConnection(port) {
 		}
 
 		var profile = message.profile
-		var id = port.sender.id + ":" + profile.name
+		var id = port.sender.id + ":" + profile.id
 
 		loaded_mods[id] = {
 			id: id,

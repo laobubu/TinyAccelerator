@@ -4,6 +4,7 @@ function ModsSearch() {
 
 	var _profile = {}
 
+	_profile.id = "search"
 	_profile.name = "Search"
 	_profile.author = "laobubu"
 	_profile.description = "universal search provider"
