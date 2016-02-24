@@ -52,6 +52,12 @@ entryButton.addEventListener("click", function(event){
 })
 ```
 
+### Security Problem
+
+The role that runs the handler functions is TinyAcc, therefore you have the power to use `chrome` namespace on behalf of TinyAcc.
+
+You can be kind or evil. This ~~bug~~ feature is a great convenience, or a sharp blade.
+
 ### Pre-defined variables and methods
 
 variables:
@@ -60,3 +66,5 @@ variables:
  - `this` the dom element
 
 methods:
+
+ - part of `chrome.*` API, on behalf of TinyAcc. Read more: <https://developer.chrome.com/extensions/content_scripts>
