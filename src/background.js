@@ -55,10 +55,21 @@ function UpdateBoxHtml(html) {
 window.fetch('box/box.html').then(res => res.text()).then(UpdateBoxHtml)
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+	let resp = {};
 	switch (msg) {
 		case "box":
-			sendResponse(box);
-			break;
+			sendResponse(box)
+			break
+		case "loaded_mods":
+			Object.keys(loaded_mods).forEach((modName) => {
+				let mod = loaded_mods[modName]
+				resp[modName] = {
+					id: mod.id,
+					profile: mod.profile
+				}
+			})
+			sendResponse(resp)
+			break
 	}
 })
 
@@ -83,7 +94,7 @@ function handleModuleResponse(msg) {
 
 function handleConnection(port) {
 	if (port.name !== "module") return
-	
+
 	var inited = false;
 	function onetimeCheck(message) {
 		if (inited) return
@@ -95,7 +106,7 @@ function handleConnection(port) {
 		}
 
 		var profile = message.profile
-		var id = port.sender.id + profile.name
+		var id = port.sender.id + ":" + profile.name
 
 		loaded_mods[id] = {
 			id: id,
