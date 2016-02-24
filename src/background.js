@@ -78,14 +78,15 @@ function handleModuleResponse(msg) {
 }
 
 function handleConnection(port) {
+	if (port.name !== "module") return
+	
 	var inited = false;
 	function onetimeCheck(message) {
 		if (inited) return
 		inited = true
 
 		if (message.type !== 'profile') {
-			if (port.sender.id !== chrome.runtime.id)
-				port.disconnect()
+			port.disconnect()
 			return
 		}
 

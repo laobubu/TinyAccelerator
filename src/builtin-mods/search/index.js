@@ -21,7 +21,7 @@ function ModsSearch() {
 		}
 	}
 
-	var port = local_connect({ name: _profile.name })//chrome.runtime.connect()
+	var port = local_connect({ name: "module" })//chrome.runtime.connect()
 	port.postMessage({
 		type: "profile",
 		profile: _profile

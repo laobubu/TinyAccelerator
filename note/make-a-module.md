@@ -51,13 +51,13 @@ The best practice is that not creating more reference to the button or view. Onc
 
 TinyAccelerator and external modules follow Chrome Message API: <https://developer.chrome.com/extensions/messaging>
 
-When a module starts, it shall make a connection to TinyAccelerator and send its corresponding [Profile].
+When a module starts, it shall open a `"module"` Port to TinyAccelerator and send its corresponding [Profile].
 
 ```javascript
 const TinyAccelerator_ID = "xxxxxxxxxxxxxxxxxxxxxxxx"
 const Profile = {...}
 
-var port = chrome.runtime.connect(TinyAccelerator_ID, {name: Profile.name})
+var port = chrome.runtime.connect(TinyAccelerator_ID, {name: "module"})
 port.postMessage({
 	type: "profile",
 	profile: Profile
