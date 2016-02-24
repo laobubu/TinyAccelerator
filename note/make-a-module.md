@@ -17,7 +17,9 @@ Usually it is a Chrome extension.
 
 Created by a [Module] when user makes a selection.
 
-Its contents vary according to user's selection.
+Its contents vary according to user's selection. To learn more, read [Make a Instance]
+
+[Make a Instance]: make-a-instance.md
 
 ## Workflow
 
@@ -86,3 +88,7 @@ port.onMessage.addListener(function(msg) {
 ```
 
 
+[Module]: #module
+[Profile]: #profile
+[Instance]: #instance
+[InstanceRequest]: ../typings/tinyacc/tinyacc.d.ts#L47
