@@ -44,7 +44,7 @@ window.addEventListener('message', function (event) {
 var sendMessage_resolvers = {}
 function sendMessage(message) {
 	return new Promise((resolve) => {
-		let timestamp = (+new Date()).toString(36)
+		let timestamp = (+new Date()).toString(36) + Math.random()
 		sendMessage_resolvers[timestamp] = resolve
 		window.postMessage({
 			type: "sm?",
