@@ -80,7 +80,7 @@
 		var left = rect.left
 		var top = rect.top
 
-		var boxHeight = 200 * 4 / 3
+		var boxHeight = 100 * 4 / 3
 
 		if ((top - boxHeight) < 0) {
 			box.div.classList.add('vertical-reverse')
