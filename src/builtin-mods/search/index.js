@@ -11,7 +11,7 @@ function ModsSearch() {
 	function _create_instance(req) {
 		return {
 			id: req.id,
-			view: ("your selection is " + req.text),
+			// view: ("your selection is " + req.text),
 			button: {
 				text: "Search",
 				event: {
