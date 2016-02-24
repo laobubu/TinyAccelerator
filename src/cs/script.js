@@ -25,13 +25,17 @@
 			box.div.classList.remove('active')
 		}
 		box.div.addEventListener('mouseenter', () => {
+			if (event.target !== box.div) return
+			
 			if (box.isHiding) {
 				clearTimeout(box.isHiding)
 				box.isHiding = 0
 			}
 			box.div.classList.add('active')
 		}, true)
-		box.div.addEventListener('mouseout', () => {
+		box.div.addEventListener('mouseleave', () => {
+			if (event.target !== box.div) return
+			
 			if (box.isHiding) {
 				clearTimeout(box.isHiding)
 			}
