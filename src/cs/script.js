@@ -10,7 +10,7 @@
 		view: container,
 		/** the `#entry` element */
 		entry: container,
-		
+
 		surroundingRects: []
 	}
 	var root = container.createShadowRoot()
@@ -34,6 +34,7 @@
 	var selection = window.getSelection()
 	var tempDiv = document.createElement('div')
 
+	container.style.right = '0px'
 	container.style.position = 'absolute'
 	function setBoxVisibility(visibile) {
 		if (visibile === box.visible) return
@@ -53,7 +54,9 @@
 		var left = rect.left
 		var top = rect.top
 
-		if ((top - box.div.offsetHeight) < 0) {
+		var boxHeight = 200 * 4 / 3
+
+		if ((top - boxHeight) < 0) {
 			box.div.classList.add('vertical-reverse')
 			top = rect.top + rect.height
 		} else {
@@ -107,7 +110,7 @@
 			}
 		}
 		console.log("request", request)
-		
+
 		port.postMessage(request)
 	}
 
@@ -130,7 +133,7 @@
 		console.log('current id is ' + currentID + ' got ' + msg.id);
 
 		if (msg.id != currentID) return
-		
+
 		var ins = msg.instance
 		var order = msg.order
 
