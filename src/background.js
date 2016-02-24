@@ -26,6 +26,10 @@ var config = (() => {
 	return sys;
 })()
 
+function genID() {
+	return (+ new Date()).toString(36) + (Math.random())
+}
+
 /////////////////////////////////////////////////////////////////////////////////////
 
 var box = { html: '', style: '' };
@@ -153,8 +157,8 @@ function local_connect(prop) {
 var port_cs = {} //ports that content script created
 
 chrome.runtime.onConnect.addListener((port) => {
-	var portID = port.name
-	if (!portID.startsWith("tinyacc+")) return
+	if (port.name !== "page") return
+	var portID = genID()
 	port_cs[portID] = port
 
 	port.onDisconnect.addListener(() => {

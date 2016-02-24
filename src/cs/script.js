@@ -134,7 +134,6 @@
 				url: window.location.href
 			}
 		}
-		console.log("request", request)
 
 		port.postMessage(request)
 	}
@@ -156,13 +155,8 @@
 		})
 	}
 
-	var port = chrome.runtime.connect({ name: genID() })
-	port.onDisconnect.addListener(() => {
-		console.log('fuck')
-	})
+	var port = chrome.runtime.connect({ name: "page" })
 	port.onMessage.addListener((msg) => {
-		console.log('current id is ' + currentID + ' got ' + msg.id);
-
 		if (msg.id != currentID) return
 
 		var ins = msg.instance
@@ -207,9 +201,8 @@
 	})
 
 	var currentID = ""
-	var genIDCounter = 0
 	function genID() {
-		currentID = "tinyacc+" + genIDCounter++ + +new Date()
+		currentID = "ta+" + (+new Date()).toString(36)
 		return currentID
 	}
 
