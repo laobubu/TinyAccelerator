@@ -11,9 +11,32 @@
 		/** the `#entry` element */
 		entry: container,
 
-		surroundingRects: []
+		surroundingRects: [],
+		
+		isHiding: 0,
+		hideAfter: 1000
 	}
 	var root = container.createShadowRoot()
+	
+	function postInit() {
+		function hidingFunc() {
+			box.isHiding = 0
+			box.div.classList.remove('active')
+		}
+		box.div.addEventListener('mouseenter', () => {
+			if (box.isHiding) {
+				clearTimeout(box.isHiding)
+				box.isHiding = 0
+			}
+			box.div.classList.add('active')
+		}, true)
+		box.div.addEventListener('mouseout', () => {
+			if (box.isHiding) {
+				clearTimeout(box.isHiding)
+			}
+			box.isHiding = setTimeout(hidingFunc, box.hideAfter)
+		}, true)
+	}
 
 	chrome.runtime.sendMessage("box", (box_info) => {
 		var style = document.createElement('style')
@@ -29,6 +52,8 @@
 		box.div = root.querySelector('#box')
 		box.view = root.querySelector('#view')
 		box.entry = root.querySelector('#entry')
+		
+		postInit()
 	})
 
 	var selection = window.getSelection()
