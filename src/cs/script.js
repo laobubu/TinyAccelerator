@@ -151,7 +151,7 @@
 	}
 
 	function monodrama(ele) {
-		[].every.call(ele.parent.children, (child) => {
+		[].every.call(ele.parentElement.children, (child) => {
 			child.style.display = (child === ele) ? "block" : "none"
 		})
 	}
