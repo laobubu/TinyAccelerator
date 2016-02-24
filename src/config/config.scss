@@ -2,6 +2,7 @@ body {
 	font-family: "PingFang SC", "Noto Sans CJK SC", "Microsoft Yahei", "DejaVu Sans", Roboto, sans-serif;
 	font-size: 11pt;
 	line-height: 14pt;
+	margin: 0;
 }
 
 h1 {
@@ -29,9 +30,20 @@ h2 {
 
 /** left side */
 
+#app {
+	position: absolute;
+	display: flex;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
 #app-select {
-	padding: 10pt;
-	width: 200pt
+	padding: 20pt;
+	width: 25%;
+	min-width: 200pt;
+	overflow-y: auto;
 }
 
 #mod-list {
