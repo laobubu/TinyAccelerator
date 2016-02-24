@@ -1,3 +1,5 @@
+'use strict'
+
 var webView1 = document.getElementById('webView1')
 // webView1.contentWindow.postMessage
 webView1.contentWindow.addEventListener('message', function (event) {
@@ -5,11 +7,13 @@ webView1.contentWindow.addEventListener('message', function (event) {
 	var type = d.type
     switch (type) {
 		case 'i18n?':
+			let texts = {}
+			d.keys.forEach((key) => { texts[key] = chrome.i18n.getMessage(key) || key })
 			event.source.postMessage({
 				type: 'i18n!',
-				text: chrome.i18n.getMessage(d.key) || d.key,
-				target: d.target
+				texts: texts
 			}, '*')
+			
 			break
 		case 'sm?':
 			/** a message proxy. require `message` and `timestamp` */

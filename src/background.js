@@ -56,7 +56,7 @@ window.fetch('box/box.html').then(res => res.text()).then(UpdateBoxHtml)
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 	let resp = {};
-	switch (msg) {
+	switch (msg.type || msg) {
 		case "box":
 			sendResponse(box)
 			break
@@ -69,6 +69,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 				}
 			})
 			sendResponse(resp)
+			break
+		case "conf":
+			if (!msg.data) {
+				//getting
+				sendResponse(conf)
+			}
 			break
 	}
 })
@@ -117,7 +123,13 @@ function handleConnection(port) {
 			profile: profile
 		}
 
-		enabled_mods.push(id) //debug
+		//FIXME! DEBUG CODE! DO NOT PUBLISTH!
+		enabled_mods.push(id)
+		conf.mods.push({
+			id: id,
+			name: profile.name,
+			enabled: true
+		})
 		
 		port.onMessage.addListener(handleModuleResponse)
 		port.onDisconnect.addListener(() => {

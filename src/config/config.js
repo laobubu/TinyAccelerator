@@ -6,7 +6,7 @@
 var app = {
 	conf: {
 		mods: [
-			{ name: 'Search', id: "wgwrgwrgw", enabled: true },
+			{ name: 'Search', id: "khepfckcgmbgjgceoiliahnbidaodpjn:Search", enabled: true },
 			{ name: 'Wiki', id: "wgwrgwrgw", enabled: false },
 			{ name: 'Lorem', id: "wgwrgwrgw", enabled: true }
 		]
@@ -38,6 +38,5 @@ $("#mod-list").sortable({
 	}
 }).disableSelection()
 
-sendMessage("loaded_mods").then((msg) => {
-	app.loaded_mods = msg
-})
+sendMessage("loaded_mods").then((loaded_mods) => { app.loaded_mods = loaded_mods })
+sendMessage("conf").then((conf) => { app.conf = conf })
