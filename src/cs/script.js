@@ -13,12 +13,12 @@
 		entry: container,
 
 		surroundingRects: [],
-		
+
 		isHiding: 0,
 		hideAfter: 1000
 	}
 	var root = container.createShadowRoot()
-	
+
 	function postInit() {
 		function hidingFunc() {
 			box.isHiding = 0
@@ -53,7 +53,7 @@
 		box.div = root.querySelector('#box')
 		box.view = root.querySelector('#view')
 		box.entry = root.querySelector('#entry')
-		
+
 		postInit()
 	})
 
@@ -110,7 +110,7 @@
 				)
 			return
 		}
-		
+
 		if (box.ghost) return
 
 		var content = range.cloneContents()
@@ -137,9 +137,9 @@
 				url: window.location.href
 			}
 		}
-		
+
 		console.log('request ' + text)
-		
+
 
 		port.postMessage(request)
 	}
@@ -180,7 +180,11 @@
 				Object.keys(event).forEach((eventName) => {
 					let eventBody = event[eventName]
 					let eventHandler = new Function("event", eventBody)
-					entryButton.addEventListener(eventName, eventHandler)
+					let self = {
+						button: entryButton,
+						view: viewContent
+					}
+					entryButton.addEventListener(eventName, eventHandler.bind(self))
 				})
 			}
 		}
@@ -196,12 +200,12 @@
 				if (box.view.firstElementChild && box.view.firstElementChild.getAttribute("order") < order) {
 					viewContent.style.display = "none"
 				}
-				
+
 				entryButton.addEventListener("mouseenter", (ev) => {
 					monodrama(viewContent)
 				})
 			}
-			
+
 			insertOrdered(viewContent, box.view, order)
 		}
 	})

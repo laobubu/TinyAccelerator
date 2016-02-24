@@ -63,7 +63,8 @@ You can be kind or evil. This ~~bug~~ feature is a great convenience, or a sharp
 variables:
 
  - `event` the original event object.
- - `this` the dom element
+ - `this.button` the button DOM element
+ - `this.view` the view DOM element
 
 methods:
 
