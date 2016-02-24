@@ -75,6 +75,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ////////////////////////////////////////////////////////////////////////////
 
+var conf = {
+	mods: []
+}
 var enabled_mods = [] //a list of mod ID
 var loaded_mods = {}  //a dict
 

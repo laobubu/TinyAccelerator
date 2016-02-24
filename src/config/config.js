@@ -3,21 +3,23 @@
 /// <reference path="translate.js" />
 // using sendMessage() to communicate with background
 
-var conf = {
-    mods: [
-		{ name: 'Search', enabled: true },
-		{ name: 'Wiki', enabled: false },
-		{ name: 'Lorem', enabled: true }
-    ]
+var app = {
+	conf: {
+		mods: [
+			{ name: 'Search', id: "wgwrgwrgw", enabled: true },
+			{ name: 'Wiki', id: "wgwrgwrgw", enabled: false },
+			{ name: 'Lorem', id: "wgwrgwrgw", enabled: true }
+		]
+	},
+	loaded_mods: {}
 }
 
-conf = new Vue({
+app = new Vue({
 	el: '#app',
-	data: conf,
+	data: app,
 	methods: {
-		showMod: function(index) {
-			var m = conf.mods[index]
-			m.enabled = !m.enabled
+		showMod: function (index) {
+			var m = app.conf.mods[index]
 		}
 	}
 })
@@ -32,10 +34,10 @@ $("#mod-list").sortable({
 		var newIndex = -1
 		newIndex = [].indexOf.call(ele.parentElement.children, ele)
 
-		conf.mods.splice(newIndex, 0, conf.mods.splice(origIndex, 1)[0])
+		app.conf.mods.splice(newIndex, 0, app.conf.mods.splice(origIndex, 1)[0])
 	}
 }).disableSelection()
 
 sendMessage("loaded_mods").then((msg) => {
-	console.log(msg)
+	app.loaded_mods = msg
 })

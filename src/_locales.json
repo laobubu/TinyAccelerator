@@ -15,6 +15,9 @@
 	"disabled": {
 		"zh": "已禁用"
 	},
+	"unavailable": {
+		"zh": "不可用"
+	},
 	
 	"CONFIG_CENTER": {
 		"en": "Config Center",

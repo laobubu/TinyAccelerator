@@ -16,8 +16,9 @@
 		</div>
 		<h2 i18n>Mods</h2>
 		<ul id="mod-list">
-			<li v-for="(index, mod) in mods" v-bind:data-index="index" v-on:click="showMod(index)">
+			<li v-for="(index, mod) in conf.mods" v-bind:data-index="index" v-on:click="showMod(index)">
 				<input type="checkbox" v-bind:checked="mod.enabled">
+				<div class="mod-unavailable" v-if="!loaded_mods[mod.id]" i18n>unavailable</div>
 				<span class="mod-name">{{ mod.name }}</span>
 			</li>
 		</ul>
