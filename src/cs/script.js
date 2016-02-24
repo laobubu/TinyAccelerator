@@ -3,6 +3,7 @@
 (function () {
 	var container = document.createElement('div')
 	var box = {
+		ghost: false,
 		visible: true,
 		/** the `#box` element */
 		div: container,
@@ -109,6 +110,8 @@
 				)
 			return
 		}
+		
+		if (box.ghost) return
 
 		var content = range.cloneContents()
 
@@ -134,6 +137,9 @@
 				url: window.location.href
 			}
 		}
+		
+		console.log('request ' + text)
+		
 
 		port.postMessage(request)
 	}
@@ -208,14 +214,18 @@
 
 	document.addEventListener('selectionchange', onSelectionChange, true)
 	document.body.addEventListener('mousedown', (ev) => {
-		if (ev.target !== container)
+		if (!box.ghost && ev.target !== container) {
+			box.ghost = true
 			box.div.classList.add('ghost')
+		}
 	}, true);
 	document.body.addEventListener('mouseup', (ev) => {
-		if (ev.target !== container) {
-			//start key search
+		//NOTICE: selectionchange fires before mouseup
+		if (box.ghost && ev.target !== container) {
+			box.ghost = false
+			box.div.classList.remove('ghost')
+			onSelectionChange()
 		}
-		box.div.classList.remove('ghost')
 	}, true)
 
 	setBoxVisibility(false)
