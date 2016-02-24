@@ -10,7 +10,17 @@ webView1.contentWindow.addEventListener('message', function (event) {
 				text: chrome.i18n.getMessage(d.key) || d.key,
 				target: d.target
 			}, '*')
-			break;
+			break
+		case 'sm?':
+			/** a message proxy. require `message` and `timestamp` */
+			chrome.runtime.sendMessage(d.message, (resp) => {
+				event.source.postMessage({
+					type: 'sm!',
+					timestamp: d.timestamp,
+					message: resp
+				}, '*')
+			})
+			break
     }
 })
 

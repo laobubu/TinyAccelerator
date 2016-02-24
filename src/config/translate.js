@@ -23,7 +23,25 @@ window.addEventListener('message', function (event) {
 			translateTodo[d.target].textContent = d.text
 			delete translateTodo[d.target]
 			break
+		case 'sm!':
+			let func = sendMessage_resolvers[d.timestamp]
+			func(d.message)
+			delete sendMessage_resolvers[d.timestamp]
+			break
 	}
 })
+
+var sendMessage_resolvers = {}
+function sendMessage(message) {
+	return new Promise((resolve) => {
+		let timestamp = (+new Date()).toString(36)
+		sendMessage_resolvers[timestamp] = resolve
+		window.postMessage({
+			type: "sm?",
+			timestamp: timestamp,
+			message: message
+		}, '*')
+	})
+}
 
 uniTranslateAll();

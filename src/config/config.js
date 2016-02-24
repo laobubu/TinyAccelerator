@@ -1,5 +1,8 @@
 'use strict'
 
+/// <reference path="translate.js" />
+// using sendMessage() to communicate with background
+
 var conf = {
     mods: [
 		{ name: 'Search', enabled: true },
@@ -32,3 +35,7 @@ $("#mod-list").sortable({
 		conf.mods.splice(newIndex, 0, conf.mods.splice(origIndex, 1)[0])
 	}
 }).disableSelection()
+
+sendMessage("loaded_mods").then((msg) => {
+	console.log(msg)
+})
