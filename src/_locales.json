@@ -39,6 +39,11 @@
 		"zh": "名字"
 	},
 	
+	"CC_HELLO1": {
+		"en": "You are using a great productivity tool! Everything will be on-the-fly after adjusting some parameters.",
+		"zh": "你正在使用一个超赞的生产力工具！调教一下将使你事半功倍！"
+	},
+	
 	"TIP_MOVE": {
 		"en": "Drag and move items to change the priority",
 		"zh": "你可以拖动以改变优先级"
