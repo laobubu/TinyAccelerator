@@ -29,7 +29,7 @@ window.addEventListener('message', function (event) {
 	switch (type) {
 		case 'i18n!':
 			translateTodo.forEach((item) => {
-				item.target.textContent = d.texts[item.key]
+				item.target.innerHTML = d.texts[item.key]
 			})
 			afterTranslate()
 			break

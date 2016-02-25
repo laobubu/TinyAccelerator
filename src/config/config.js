@@ -47,7 +47,3 @@ $("#mod-list").sortable({
 
 sendMessage("loaded_mods").then((loaded_mods) => { app.loaded_mods = loaded_mods })
 sendMessage("conf").then((conf) => { app.conf = conf })
-
-setTimeout(function () {
-	document.querySelector('#mod-list li').click()
-}, 200);
