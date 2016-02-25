@@ -26,7 +26,7 @@
 		}
 		box.div.addEventListener('mouseenter', () => {
 			if (event.target !== box.div) return
-			
+
 			if (box.isHiding) {
 				clearTimeout(box.isHiding)
 				box.isHiding = 0
@@ -35,7 +35,7 @@
 		}, true)
 		box.div.addEventListener('mouseleave', () => {
 			if (event.target !== box.div) return
-			
+
 			if (box.isHiding) {
 				clearTimeout(box.isHiding)
 			}
@@ -159,10 +159,17 @@
 		parent.insertBefore(ele, insertBefore)
 	}
 
+	var monodramaLast = null
 	function monodrama(ele) {
-		[].every.call(ele.parentElement.children, (child) => {
-			child.style.display = (child === ele) ? "block" : "none"
-		})
+		if (monodramaLast) {
+			monodramaLast.view.style.display = 'none'
+			monodramaLast.button.classList.remove('active')
+		}
+		if (monodramaLast = ele) {
+			box.view.appendChild(monodramaLast.view)
+			monodramaLast.view.style.display = 'block'
+			monodramaLast.button.classList.add('active')
+		}
 	}
 
 	var port = chrome.runtime.connect({ name: "page" })
@@ -171,6 +178,10 @@
 
 		var ins = msg.instance
 		var order = msg.order
+		let self = {
+			button: null,
+			view: null
+		}
 
 		if (ins.button.text) {
 			var entryButton = document.createElement('div')
@@ -178,16 +189,14 @@
 			entryButton.setAttribute("tinyacc-instance", ins.id)
 			entryButton.textContent = ins.button.text
 			insertOrdered(entryButton, box.entry, order)
+			
+			self.button = entryButton
 
 			let event = ins.button.event
 			if (event) {
 				Object.keys(event).forEach((eventName) => {
 					let eventBody = event[eventName]
 					let eventHandler = new Function("event", eventBody)
-					let self = {
-						button: entryButton,
-						view: viewContent
-					}
 					entryButton.addEventListener(eventName, eventHandler.bind(self))
 				})
 			}
@@ -198,19 +207,20 @@
 			viewContent.className = "view-content"
 			viewContent.setAttribute("tinyacc-instance", ins.id)
 			viewContent.innerHTML = ins.view
+			
+			self.view = viewContent
+			insertOrdered(viewContent, box.view, order)
 
 			if (entryButton) {
-				//if have a button and order num is large, then hide the view 
-				if (box.view.firstElementChild && box.view.firstElementChild.getAttribute("order") < order) {
-					viewContent.style.display = "none"
+				//if have a button and has a low priority, then hide it!!
+				if (box.view.firstElementChild !== viewContent) {
+					monodrama(self)
 				}
 
 				entryButton.addEventListener("mouseenter", (ev) => {
-					monodrama(viewContent)
+					monodrama(self)
 				})
 			}
-
-			insertOrdered(viewContent, box.view, order)
 		}
 	})
 
