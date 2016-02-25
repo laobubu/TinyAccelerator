@@ -40,7 +40,7 @@
 		"scripts": [
 			"background.js",
 			"builtin-mods/search/index.js",
-			"builtin-mods/dict/index.js"
+			"builtin-mods/translator/index.js"
 		],
 		"persistent": true //reloading is a disaster
 	}

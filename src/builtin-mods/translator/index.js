@@ -1,16 +1,16 @@
 'use strict'
 
-function ModsDict() {
+function ModsTranslator() {
 
 	var _profile = {}
 	
-	var btn = chrome.i18n.getMessage("Dict")
+	var btn = chrome.i18n.getMessage("Translate")
 
 	_profile.id = "dict"
-	_profile.name = chrome.i18n.getMessage("Dictionary")
+	_profile.name = chrome.i18n.getMessage("Translator")
 	_profile.author = "laobubu"
-	_profile.description = chrome.i18n.getMessage("DICT_DESCRIPT")
-	_profile.fullDescription = chrome.i18n.getMessage("DICT_DESCRIPT_FULL")
+	_profile.description = chrome.i18n.getMessage("TRANSLATOR_DESCRIPT")
+	_profile.fullDescription = chrome.i18n.getMessage("TRANSLATOR_DESCRIPT_FULL")
 
 	function _create_instance(req) {
 		return new Promise((resolve) => {
@@ -71,4 +71,4 @@ function ModsDict() {
 
 }
 
-ModsDict()
+ModsTranslator()
