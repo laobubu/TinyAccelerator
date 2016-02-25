@@ -12,7 +12,10 @@ var app = {
 		]
 	},
 	loaded_mods: {},
-	current_mod: null
+	page: {
+		name: "welcome",
+		mod: null
+	}
 }
 
 Vue.config.debug = true
@@ -23,11 +26,26 @@ app = new Vue({
 	methods: {
 		showMod: function (index) {
 			var m = app.conf.mods[index]
-			app.current_mod = app.loaded_mods[m.id]
+			var mod = app.loaded_mods[m.id]
+			app.page.mod = mod || m
+			app.page.name = mod ? "show" : "mod404"
 		}
 	},
-	filters: {
-		marked: marked
+	components: {
+		pageShow: {
+			template: "#page-show",
+			props: ["mod"],
+			filters: {
+				marked: marked
+			}
+		},
+		pageMod404: {
+			template: "#page-mod404",
+			props: ["mod"],
+		},
+		pageWelcome: {
+			template: "#page-welcome"
+		}
 	}
 })
 

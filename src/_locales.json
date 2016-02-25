@@ -44,8 +44,8 @@
 		"zh": "你可以拖动以改变优先级"
 	},
 	"MOD_NOT_FOUND_EXPLAIN": {
-		"en": "<p>The module {{ current_mod.id }} is not loaded.</p> <p>If the corresponding extension is installed, please disable and re-enable it.</p>",
-		"zh": "<p>模块 {{ current_mod.id }} 没有被载入。</p> <p>如果已安装对应的浏览器扩展程序，试试看先禁用，然后重新启用它。</p>"
+		"en": "<p>The module {{ mod.id }} is not loaded.</p> <p>If the corresponding extension is installed, please disable and re-enable it.</p>",
+		"zh": "<p>模块 {{ mod.id }} 没有被载入。</p> <p>如果已安装对应的浏览器扩展程序，试试看先禁用，然后重新启用它。</p>"
 	},
 	
 	

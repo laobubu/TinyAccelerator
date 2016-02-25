@@ -12,7 +12,7 @@
 <div id="app">
 	<div id="app-select">
 		<div class="float-right">
-			<button i18n>Add</button>
+			<button i18n onclick="app.mod=null">Add</button>
 		</div>
 		<h2 i18n>Modules</h2>
 		<ul id="mod-list">
@@ -24,49 +24,53 @@
 		<small i18n>TIP_MOVE</small>
 	</div>
 	
-	<base target="_blank">
-	
 	<div id="app-detail">
-		<div v-if="current_mod">
-			<div v-if="current_mod.profile">
-			<h1>
-				<img v-bind:src="current_mod.profile.image || '/image/package-64.png'" alt="" width="64" height="64">
-				{{ current_mod.profile.name }}
-			</h1>
-			<table class="mod-meta">
-				<tr>
-					<th i18n>ID</th>
-					<td>{{ current_mod.id }}</td>
-				</tr>
-				<tr>
-					<th i18n>Author</th>
-					<td>{{ current_mod.profile.author }}</td>
-				</tr>
-				<tr v-show="current_mod.profile.url">
-					<th i18n>URL</th>
-					<td><a v-bind:href="current_mod.profile.url">{{ current_mod.profile.url }}</a></td>
-				</tr>
-			</table>
-			<div class="mod-description">
-				<div v-if="current_mod.profile.fullDescription" v-html="current_mod.profile.fullDescription | marked"></div>
-				<p v-else>{{ current_mod.profile.description }}</p>
-			</div>
-			</div>
-			<div v-else>
-			<h1>
-				<img src="/image/error-64.png" alt="" width="64" height="64">
-				<span i18n>Not Found</span>
-			</h1>
-			<div i18n>MOD_NOT_FOUND_EXPLAIN</div>
-			</div>
-		</div>
-		<div v-else>
-			<h1>NOT FOUND</h1>
-		</div>
+		<base target="_blank">
+		<page-welcome  v-if="page.name == 'welcome'"   ></page-welcome>
+		<page-show     v-if="page.name == 'show'"      v-bind:mod="page.mod"></page-show>
+		<page-mod404   v-if="page.name == 'mod404'"    v-bind:mod="page.mod"></page-mod404>
 	</div>
 </div>
 
+<template id="page-welcome">
+	<p>HELLO WORLD</p>
+</template>
+
+<template id="page-show">
+	<h1>
+		<img v-bind:src="mod.profile.image || '/image/package-64.png'" alt="" width="64" height="64">
+		{{ mod.profile.name }}
+	</h1>
+	<table class="mod-meta">
+		<tr>
+			<th i18n>ID</th>
+			<td>{{ mod.id }}</td>
+		</tr>
+		<tr>
+			<th i18n>Author</th>
+			<td>{{ mod.profile.author }}</td>
+		</tr>
+		<tr v-show="mod.profile.url">
+			<th i18n>URL</th>
+			<td><a v-bind:href="mod.profile.url">{{ mod.profile.url }}</a></td>
+		</tr>
+	</table>
+	<div class="mod-description">
+		<div v-if="mod.profile.fullDescription" v-html="mod.profile.fullDescription | marked"></div>
+		<p v-else>{{ mod.profile.description }}</p>
+	</div>
+</template>
+
+<template id="page-mod404">
+	<h1>
+		<img src="/image/error-64.png" alt="" width="64" height="64">
+		<span i18n>Not Found</span>
+	</h1>
+	<div i18n>MOD_NOT_FOUND_EXPLAIN</div>
+</template>
+
 <script src="../libs/vue/vue.js"></script>
+<script src="../libs/vue/vue-router.min.js"></script>
 <script src="../libs/marked/marked.min.js"></script>
 <script src="../libs/jquery-ui/jquery.min.js"></script>
 <script src="../libs/jquery-ui/jquery-ui.min.js"></script>
