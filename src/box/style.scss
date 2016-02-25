@@ -84,6 +84,11 @@ h2 {
 			cursor: pointer;
 			transition: .1s ease-out;
 			
+			&.active {
+				color: #01579B;
+				background: radial-gradient(at top, #FFF, transparent);
+			}
+			
 			&:hover {
 				background: #333;
 				box-shadow: 0 1px 5px #000 inset;
