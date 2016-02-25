@@ -4,7 +4,11 @@ var translateTodo = []
 var afterTranslate
 
 function uniTranslateAll() {
-	var x = document.querySelectorAll('[i18n]');
+	var x = [].slice.call(document.querySelectorAll('[i18n]'));
+	x.forEach.call(document.querySelectorAll('template'), (template) => {
+		var xt = template.content.querySelectorAll('[i18n]');
+		x.push.apply(x, xt)
+	})
 	var keys = {}
 	for (var i = x.length; --i !== -1;) {
 		let key = x[i].textContent.replace(/ /g, '_')
