@@ -1,10 +1,28 @@
+h1,h2,h3,p {
+	margin-top: 4pt;
+	margin-bottom: 4pt;
+	line-height: 1.2em;
+}
+ul,ol{
+	margin: 0 0.4em;
+	padding: 0;
+	padding-left: 2em;
+}
+h1 {
+	font-size: 150%;
+}
+h2 {
+	font-size: 120%;
+}
+
 #box {
 	font-family: "PingFang SC", "Noto Sans CJK SC", "Microsoft Yahei", "DejaVu Sans", Roboto, Arial, sans-serif;
 	font-size: 10pt;
 	
 	border: 1px solid rgba(0, 0, 0, 0.6);
+	border-radius: 5px;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
-	background-color: #EEE;
+	background-color: #fafafa;
 	color: #000;
 	
 	box-sizing: content-box;
@@ -19,16 +37,18 @@
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-	opacity: 0.4;
+	opacity: 0.8;
 	
-	transition: opacity .4s;
+	transition: .4s;
 
 	#view {
+		display: none;
+		
 		overflow: auto;
 		flex-grow: 1;
-		display: none;
+		
 		.view-content {
-			padding: 4pt;
+			margin: 4pt;
 		}
 	}
 
@@ -36,18 +56,19 @@
 		flex-shrink: 0;
 		display: flex;
 		flex-wrap: nowrap;
+		background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
 		
 		.entry-btn {
 			display: block;
 			margin: 0;
-			padding: 4pt 0;
+			padding: 2pt 8pt;
 			box-sizing: border-box;
-			width: 45pt;
 			color: #333;
 			text-decoration: none;
 			text-align: center;
 			overflow: hidden;
 			cursor: pointer;
+			transition: .1s ease-out;
 			
 			&:hover {
 				background: #333;
@@ -59,7 +80,8 @@
 	
 	&.active{
 		opacity: 1;
-		transition: opacity .1s;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+		transition: .1s;
 		
 		#view {
 			display: block;
@@ -82,21 +104,4 @@
 			flex-direction: row-reverse;
 		}
 	}
-}
-
-h1,h2,h3,p {
-	margin-top: 0.4em;
-	margin-bottom: 0.4em;
-	line-height: 1.2em;
-}
-ul,ol{
-	margin: 0 0.4em;
-	padding: 0;
-	padding-left: 2em;
-}
-h1 {
-	font-size: 150%;
-}
-h2 {
-	font-size: 120%;
 }
