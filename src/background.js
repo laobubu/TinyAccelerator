@@ -125,11 +125,7 @@ function handleConnection(port) {
 
 		//FIXME! DEBUG CODE! DO NOT PUBLISTH!
 		enabled_mods.push(id)
-		conf.mods.push({
-			id: id,
-			name: profile.name,
-			enabled: true
-		})
+		conf.mods.push(id)
 		
 		port.onMessage.addListener(handleModuleResponse)
 		port.onDisconnect.addListener(() => {

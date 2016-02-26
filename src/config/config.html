@@ -16,8 +16,8 @@
 		</div>
 		<h2 i18n>Enabled Modules</h2>
 		<ul id="enabled-mods" class="mod-list">
-			<li v-for="(index, mod) in conf.mods" v-bind:data-index="index" v-on:click="showMod(index)" v-bind:class="loaded_mods[mod.id] ? '' : 'mod-unavailable'">
-				<span class="mod-name">{{ mod.name }}</span>
+			<li v-for="id in conf.mods" v-bind:data-id="id" v-on:click="showMod(id)" v-bind:class="loaded_mods[id] ? '' : 'mod-unavailable'">
+				<span v-if="loaded_mods[id]" class="mod-name">{{ loaded_mods[id].profile.name }}</span>
 			</li>
 		</ul>
 		<small i18n>TIP_MOVE</small>
@@ -34,12 +34,9 @@
 			<section>
 				<h2 i18n>Modules</h2>
 				<ul class="mod-list mod-list-wall" id="disabled-mods">
-					<li><span class="mod-name">LOREM1</span></li>
-					<li><span class="mod-name">LOREM2</span></li>
-					<li><span class="mod-name">LOREM3</span></li>
-					<li><span class="mod-name">LOREM4</span></li>
-					<li><span class="mod-name">LOREM5</span></li>
-					<li><span class="mod-name">LOREM6</span></li>
+					<li v-for="id in disabled_mods" v-bind:data-id="id">
+						<span class="mod-name">{{ loaded_mods[id].profile.name }}</span>
+					</li>
 				</ul>
 			</section>
 		</div>

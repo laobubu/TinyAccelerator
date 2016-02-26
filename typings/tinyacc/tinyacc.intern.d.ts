@@ -7,15 +7,18 @@
 ///
 
 declare type confType = {
-	mods: { name: string, id: string, enabled: boolean }[]
+	/** the enabled mods id */
+	mods: string[]
+};
+
+declare type modDictItem = {
+	id: string,
+	profile: TinyAcc.Profile,
+	port?: chrome.runtime.Port
 };
 
 declare type modDictType = {
-	[id: string]: {
-		id: string,
-		profile: TinyAcc.Profile,
-		port?: chrome.runtime.Port
-	}
+	[id: string]: modDictItem
 };
 
 declare var conf: confType;
@@ -25,8 +28,9 @@ declare var loaded_mods: modDictType;
 declare var app: {
 	conf: confType,
 	loaded_mods: modDictType,
-	current_mod: {
-		id: string,
-		profile: TinyAcc.Profile
+	disabled_mods: string[],
+	page: {
+		name: string,
+		mod?: modDictItem
 	}
 };
