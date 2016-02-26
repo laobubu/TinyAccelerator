@@ -24,8 +24,25 @@
   Name: 
     zh: "名字"
   CC_HELLO1: 
-    en: "You are using a great productivity tool! Everything will be on-the-fly after adjusting some parameters."
-    zh: "你正在使用一个超赞的生产力工具！调教一下将使你事半功倍！"
+    en: |
+      You are using a great productivity tool! 
+      Everything will be on-the-fly after adjusting some parameters.
+      
+      ## Install modules
+      
+      Dozens of modules can be added to TinyAccelerator. Translator, Wikipedia, Digest and more. 
+      You can even make your own modules.
+      
+      [Module Gallery &raquo;](.)
+    zh: |
+      你正在使用一个超赞的生产力工具！调教一下将使你事半功倍！
+      
+      ## 安装模块
+      
+      各种神奇的模块都可以安装到 TinyAccelerator 上，譬如翻译、百科、文摘等等。
+      你还可以自制你的专属模块。
+      
+      [模块大全 &raquo;](.)
   TIP_MOVE: 
     en: "Drag and move items to change the priority"
     zh: "你可以拖动以改变优先级"

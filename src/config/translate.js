@@ -34,7 +34,7 @@ window.addEventListener('message', function (event) {
 		case 'i18n!':
 			translateTodo.forEach((item) => {
 				let html = d.texts[item.key]
-				let i18n = item.getAttribute('i18n')
+				let i18n = item.target.getAttribute('i18n')
 				if (i18n === "marked") html = marked(html)
 				item.target.innerHTML = html
 			})

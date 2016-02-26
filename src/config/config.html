@@ -37,12 +37,12 @@
 		<img src="/logo.png" alt="" width="64" height="64">
 		<span i18n>Config Center</span>
 	</h1>
-	<p i18n>CC_HELLO1</p>
+	<section i18n="marked">CC_HELLO1</section>
 </template>
 
 <template id="page-show">
 	<h1>
-		<img v-bind:src="mod.profile.image || '/image/package-64.png'" alt="" width="64" height="64">
+		<img v-bind:src="mod.profile.image || '/image/apps-64.png'" alt="" width="64" height="64">
 		{{ mod.profile.name }}
 	</h1>
 	<table class="mod-meta">
@@ -70,7 +70,15 @@
 		<img src="/image/error-64.png" alt="" width="64" height="64">
 		<span i18n>Not Found</span>
 	</h1>
-	<div i18n>MOD_NOT_FOUND_EXPLAIN</div>
+	<div i18n="marked">MOD_NOT_FOUND_EXPLAIN</div>
+</template>
+
+<template id="page-add">
+	<h1>
+		<img src="/image/error-64.png" alt="" width="64" height="64">
+		<span i18n>Add</span>
+	</h1>
+	<div i18n="marked">MOD_NOT_FOUND_EXPLAIN</div>
 </template>
 
 <script src="../libs/vue/vue.js"></script>
