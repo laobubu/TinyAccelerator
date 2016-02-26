@@ -3,21 +3,22 @@
 var args = process.argv.slice(2);
 
 if (args.length !== 2) {
-	console.log("Usage: generate_locales.js JSON OUTDIR");
-	console.log(" - JSON \t the path to json file.")
+	console.log("Usage: generate_locales.js YAML OUTDIR");
+	console.log(" - YAML \t the path to yaml file.")
 	console.log(" - OUTDIR \t the path to dir with '_locales'")
 	process.exit(1)
 }
 
 var arg = {
-	json: args[0],
+	yaml: args[0],
 	outdir: args[1]
 }
 
 var path = require('path')
 var fs = require('fs')
+var yaml = require('js-yaml')
 
-var source = JSON.parse(fs.readFileSync(arg.json, 'UTF-8'))
+var source = yaml.safeLoad(fs.readFileSync(arg.yaml, 'UTF-8'))
 var output = {}
 
 for (let key in source) {

@@ -1,0 +1,55 @@
+---
+  extName: 
+    en: "TinyAccelerator"
+    description: "Extension name"
+  extDesc: 
+    en: "Select a word and do action quickly"
+  Add: 
+    zh: "添加"
+  Author: 
+    zh: "作者"
+  disabled: 
+    zh: "已禁用"
+  unavailable: 
+    zh: "不可用"
+  Not Found: 
+    zh: "未找到"
+  CONFIG_CENTER: 
+    en: "Config Center"
+    zh: "配置中心"
+  Modules: 
+    zh: "模块"
+  Module: 
+    zh: "模块"
+  Name: 
+    zh: "名字"
+  CC_HELLO1: 
+    en: "You are using a great productivity tool! Everything will be on-the-fly after adjusting some parameters."
+    zh: "你正在使用一个超赞的生产力工具！调教一下将使你事半功倍！"
+  TIP_MOVE: 
+    en: "Drag and move items to change the priority"
+    zh: "你可以拖动以改变优先级"
+  MOD_NOT_FOUND_EXPLAIN: 
+    en: >
+      The module {{ mod.id }} is not loaded.
+      
+      If the corresponding extension is installed, please disable and re-enable it.
+    zh: >
+      模块 {{ mod.id }} 没有被载入。
+      
+      如果已安装对应的浏览器扩展程序，试试看先禁用，然后重新启用它。
+  Translate: 
+    zh: "翻译"
+  Translator: 
+    zh: "翻译者"
+  TRANSLATOR_DESCRIPT: 
+    en: "A simple dictionary using Youdao API"
+    zh: "一个使用有道词典API实现的词典"
+  TRANSLATOR_DESCRIPT_FULL: 
+    en: "A dictionary using [Youdao Open API](http://fanyi.youdao.com/openapi?path=data-mode), providing translation from English to Chinese."
+    zh: "一个使用[有道词典API](http://fanyi.youdao.com/openapi?path=data-mode)实现的词典，能够将选中的英文词汇翻译为中文。"
+  Search: 
+    zh: "搜索"
+  SEARCH_DESCRIPT: 
+    en: "Universal search provider"
+    zh: "通用的搜索按钮"
