@@ -44,14 +44,7 @@
 	}
 
 	chrome.runtime.sendMessage("box", (box_info) => {
-		var style = document.createElement('style')
-		style.textContent = box_info.style
-		root.appendChild(style)
-
-		container.innerHTML = box_info.html
-		while (container.firstChild) {
-			root.appendChild(container.firstChild)
-		}
+		root.innerHTML = '<style style="display:none">\n' + box_info.style + '\n</style>' + box_info.html
 
 		document.body.appendChild(container)
 		box.div = root.querySelector('#box')
