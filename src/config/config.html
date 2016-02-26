@@ -26,6 +26,10 @@
 	
 	<div id="app-detail">
 		<base target="_blank">
+		<div id="loading" v-bind:class="saving ? '': 'hidden'">
+			<div class="loader"></div>
+			<span i18n>Working</span>
+		</div>
 		<div  v-show="page.name == 'welcome'"   >
 			<h1>
 				<img src="/image/package-64.png" alt="" width="64" height="64">

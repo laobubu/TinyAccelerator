@@ -13,6 +13,7 @@ var app = {
 	},
 	loaded_mods: {},
 	disabled_mods: [],
+	saving: false,
 	page: {
 		name: "welcome",
 		mod: null
@@ -63,12 +64,12 @@ function updateModuleSetting() {
 }
 
 function commitConf() {
-	if (commitConf.working) return
-	commitConf.working = sendMessage({
+	if (app.saving) return
+	app.saving = sendMessage({
 		type: 'conf',
 		data: app.conf
 	}).then(() => {
-		commitConf.working = null
+		app.saving = false
 	})
 }
 
