@@ -90,7 +90,7 @@ var loaded_mods = {}  //a dict
 
 function handleModuleResponse(msg) {
 	if (msg.type === "instance") {
-		console.log("module response!", msg)
+		console.log("module response!", msg.instance.id, msg.instance)
 		var infos = msg.instance.id.split("|") // 0: portID 1: reqID 2: order
 		var port = port_cs[infos[0]]
 		if (!port) return
@@ -187,12 +187,15 @@ chrome.runtime.onConnect.addListener((port) => {
 		delete port_cs[portID]
 	})
 	port.onMessage.addListener((msg) => {
+		let baseReq = JSON.stringify(msg.info)
 		conf.mods.forEach((mod_id, index) => {
-			var mod = loaded_mods[mod_id]
-			var instanceRequest = Object.assign(msg.info, {
-				id: (portID + "|" + msg.id + "|" + index)
-			})
+			let mod = loaded_mods[mod_id]
+			let instanceRequest = JSON.parse(baseReq)
+			instanceRequest.id = (portID + "|" + msg.id + "|" + index)
+			instanceRequest.for = mod_id
 			if (!mod) return
+			
+			console.log('dispatch', mod_id, instanceRequest);
 
 			mod.port.postMessage({
 				type: "request",
