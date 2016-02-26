@@ -57,6 +57,7 @@ a {
 #app-select {
 	width: 25%;
 	min-width: 200pt;
+	flex-shrink: 0;
 	
 	h2 {
 		margin: 0;
@@ -71,42 +72,22 @@ a {
 	}
 }
 
-#mod-list {
+.mod-list {
 	list-style: none;
 	margin: 10pt 0;
 	padding: 0;
+	min-height: 22pt;
 
 	li {
 		height: 22pt;
 		line-height: 22pt;
 		background: #eee;
-		color: #999;
+		color: #000;
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 		cursor: pointer;
 		padding: 0 5pt;
 		&:hover {
 			background: #fafafa;
-		}
-		
-		.mod-name::after{
-			content: ' (__MSG_disabled__)';
-			font-size: 8pt;
-		}
-		
-		input {
-			float: right;
-			vertical-align: middle;
-			height: 12pt;
-			width: 12pt;
-			margin-top: 5pt;
-			display: none;
-			
-			&:checked ~ .mod-name{
-				color: #000;
-				&:after{
-					content: '';
-				}
-			}
 		}
 		
 		&.mod-unavailable .mod-name {
@@ -115,15 +96,25 @@ a {
 				content: ' (__MSG_unavailable__)' !important;
 			}
 		}
-
-		&:hover input {
-			display: initial;
-		}
 	}
 		
 	.sortable-placeholder {
 		height: 22pt;
 		background: #aaa;
 		box-shadow: none;
+	}
+	
+	&.mod-list-wall {
+		li {
+			box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+			width: 30%;
+			min-width: 200pt;
+			float: left;
+		}
+		&:after {
+			display: block;
+			content: ' ';
+			clear: both;
+		}
 	}
 }

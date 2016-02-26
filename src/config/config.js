@@ -42,16 +42,13 @@ app = new Vue({
 		pageMod404: {
 			template: "#page-mod404",
 			props: ["mod"],
-		},
-		pageWelcome: {
-			template: "#page-welcome"
 		}
 	}
 })
 
-$("#mod-list").sortable({
-	axis: "y",
+$(".mod-list").sortable({
 	forcePlaceholderSize: true,
+	connectWith: ".mod-list",
 	placeholder: "sortable-placeholder",
 	stop: (ev, ui) => {
 		var ele = ui.item[0]
@@ -59,7 +56,7 @@ $("#mod-list").sortable({
 		var newIndex = -1
 		newIndex = [].indexOf.call(ele.parentElement.children, ele)
 
-		app.conf.mods.splice(newIndex, 0, app.conf.mods.splice(origIndex, 1)[0])
+		// app.conf.mods.splice(newIndex, 0, app.conf.mods.splice(origIndex, 1)[0])
 	}
 }).disableSelection()
 
