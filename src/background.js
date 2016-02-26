@@ -76,6 +76,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 				sendResponse(conf)
 			} else {
 				conf = msg.data
+				config.set('user.conf', conf)
 				sendResponse(true)
 			}
 			break
@@ -85,9 +86,18 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 ////////////////////////////////////////////////////////////////////////////
 
 var conf = {
-	mods: []
+	mods: [
+		(chrome.runtime.id + ":search")
+	]
 }
 var loaded_mods = {}  //a dict
+
+setTimeout(() => {
+	config.get('user.conf').then((c) => {
+		console.log('RESOLVE', c);
+		c && (conf = c)
+	})
+}, 500) //YOU PROMISED!!!! YOU PROMISED!!!
 
 function handleModuleResponse(msg) {
 	if (msg.type === "instance") {
@@ -125,9 +135,6 @@ function handleConnection(port) {
 			profile: profile
 		}
 
-		//FIXME! DEBUG CODE! DO NOT PUBLISTH!
-		conf.mods.push(id)
-		
 		port.onMessage.addListener(handleModuleResponse)
 		port.onDisconnect.addListener(() => {
 			delete loaded_mods[id]
@@ -195,7 +202,7 @@ chrome.runtime.onConnect.addListener((port) => {
 			instanceRequest.id = (portID + "|" + msg.id + "|" + index)
 			instanceRequest.for = mod_id
 			if (!mod) return
-			
+
 			console.log('dispatch', mod_id, instanceRequest);
 
 			mod.port.postMessage({
