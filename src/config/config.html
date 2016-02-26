@@ -110,6 +110,9 @@
 <script src="../libs/tinyacc/translate.js"></script>
 <script>
 uniTranslateAll().then(() => {
+	$('a[href]').each((i, e)=>{
+		e.href = 'javascript:window.postMessage({type:"open?",url:"' + e.href + '"},"*")'
+	})
 	var script = document.createElement('script')
 	script.src = "config.js"
 	document.body.appendChild(script)

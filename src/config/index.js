@@ -25,6 +25,9 @@ webView1.contentWindow.addEventListener('message', function (event) {
 				}, '*')
 			})
 			break
+		case 'open?':
+			window.open(d.url)
+			break
     }
 })
 
