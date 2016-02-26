@@ -76,6 +76,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 				sendResponse(conf)
 			} else {
 				conf = msg.data
+				sendResponse(true)
 			}
 			break
 	}
