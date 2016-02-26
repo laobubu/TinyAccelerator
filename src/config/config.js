@@ -59,6 +59,17 @@ function updateModuleSetting() {
 		mods.push(ele.getAttribute("data-id"))
 	})
 	app.conf.mods = mods
+	commitConf()
+}
+
+function commitConf() {
+	if (commitConf.working) return
+	commitConf.working = sendMessage({
+		type: 'conf',
+		data: app.conf
+	}).then(() => {
+		commitConf.working = null
+	})
 }
 
 $(".mod-list").sortable({
@@ -75,6 +86,4 @@ $(".mod-list").sortable({
 }).disableSelection()
 
 sendMessage("loaded_mods").then((loaded_mods) => { app.loaded_mods = loaded_mods })
-sendMessage("conf").then((conf) => { //app.conf = conf
-	app.conf.mods.push('khepfckcgmbgjgceoiliahnbidaodpjn:nonexists')
-})
+sendMessage("conf").then((conf) => { app.conf = conf })
