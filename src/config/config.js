@@ -30,6 +30,17 @@ app = new Vue({
 			var mod = app.loaded_mods[id]
 			app.page.mod = mod || { id: id, profile: null }
 			app.page.name = mod ? "show" : "mod404"
+		},
+		enableMod: function (id) {
+			app.conf.mods.push(id)
+			commitConf()
+		}
+	},
+	events: {
+		disable: function (id) {
+			app.conf.mods.$remove(id)
+			app.page.name = "welcome"
+			commitConf()
 		}
 	},
 	computed: {
@@ -43,6 +54,9 @@ app = new Vue({
 		pageShow: {
 			template: "#page-show",
 			props: ["mod"],
+			methods: {
+				disable: function (id) { this.$dispatch('disable', id) }
+			},
 			filters: {
 				marked: marked
 			}
@@ -78,6 +92,7 @@ $(".mod-list").sortable({
 	connectWith: ".mod-list",
 	placeholder: "sortable-placeholder",
 	start: () => {
+		app.page.name = "welcome"
 		$(".mod-list").addClass("emphasis")
 	},
 	stop: () => {

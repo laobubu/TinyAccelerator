@@ -11,6 +11,7 @@ function ModsTranslator() {
 	_profile.author = "laobubu"
 	_profile.description = chrome.i18n.getMessage("TRANSLATOR_DESCRIPT")
 	_profile.fullDescription = chrome.i18n.getMessage("TRANSLATOR_DESCRIPT_FULL")
+	_profile.url = "http://laobubu.net"
 
 	function _create_instance(req) {
 		return new Promise((resolve) => {

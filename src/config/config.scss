@@ -120,10 +120,13 @@ a {
 	margin: 10pt 0;
 	padding: 0;
 	min-height: 22pt;
-	transition: box-shadow .3s ease-in;
+	outline: 3px solid transparent;
+	transition: .3s ease;
 	
 	&.emphasis {
-		box-shadow: 0 0 10px #ACF ,0 0 5px #ACF inset;
+		box-shadow: 0 0 2px #06A ,0 0 1px #06A inset;
+		outline: 1px solid #06A;
+		transition-duration: .15s;
 	}
 
 	li {
@@ -148,19 +151,58 @@ a {
 		
 	.sortable-placeholder {
 		height: 22pt;
-		background: #aaa;
+		background: #06A;
 		box-shadow: none;
 	}
 	
 	&.mod-list-wall {
-		min-height: 100pt;
+		min-height: 90pt;
 		background: linear-gradient(#fafafa, #fff);
-		border-radius: 4pt;
 		li {
+			height: 90pt;
 			width: 30%;
 			min-width: 200pt;
 			float: left;
 			margin: 2pt;
+			overflow: hidden;
+			position: relative;
+			
+			.mod-links {
+				display: none;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				padding: 4pt;
+				font-size: 0.87em;
+				line-height: 1.4em;
+				text-align: right;
+				background: inherit;
+				a {
+					background-image: none;
+					padding: 2px 6px;
+					display: inline-block;
+					text-shadow: none;
+					border: 1px solid transparent;
+					border-radius: 4px;
+					&:hover {
+						border-color: #06A;
+					}
+				}
+			}
+			
+			&:hover .mod-links {
+				display: block;
+			}
+			
+			.mod-meta {
+				color: #666;
+				font-size: 0.87em;
+				line-height: 1.4em;
+				padding: 5pt;
+				> div {
+					margin: 4px 0;
+				}
+			}
 		}
 		&:after {
 			display: block;

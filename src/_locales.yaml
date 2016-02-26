@@ -6,6 +6,14 @@
     en: "Select a word and do action quickly"
   Add: 
     zh: "添加"
+  Delete:
+    zh: "删除"
+  Disable:
+    zh: "禁用"
+  Enable:
+    zh: "启用"
+  Website:
+    zh: "网站"
   Author: 
     zh: "作者"
   disabled: 

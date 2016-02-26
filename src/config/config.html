@@ -39,7 +39,15 @@
 			<section>
 				<ul class="mod-list mod-list-wall" id="disabled-mods">
 					<li v-for="id in disabled_mods" v-bind:data-id="id">
-						<span class="mod-name">{{ loaded_mods[id].profile.name }}</span>
+						<div class="mod-name">{{ loaded_mods[id].profile.name }}</div>
+						<div class="mod-meta">
+							<div><b i18n>Author</b> {{ loaded_mods[id].profile.author }}</div>
+							<div>{{ loaded_mods[id].profile.description }}</div>
+						</div>
+						<div class="mod-links">
+							<a i18n v-on:click="enableMod(id)">Enable</a>
+							<a v-show="loaded_mods[id].profile.url" i18n v-bind:href="loaded_mods[id].profile.url">Website</a>
+						</div>
 					</li>
 				</ul>
 			</section>
@@ -54,6 +62,9 @@
 		<img v-bind:src="mod.profile.image || '/image/apps-64.png'" alt="" width="64" height="64">
 		{{ mod.profile.name }}
 	</h1>
+	<p>
+		<button i18n v-on:click="disable(mod.id)">Disable</button>
+	</p>
 	<table class="mod-meta">
 		<tr>
 			<th i18n>ID</th>
@@ -64,7 +75,7 @@
 			<td>{{ mod.profile.author }}</td>
 		</tr>
 		<tr v-show="mod.profile.url">
-			<th i18n>URL</th>
+			<th i18n>Website</th>
 			<td><a v-bind:href="mod.profile.url">{{ mod.profile.url }}</a></td>
 		</tr>
 	</table>
