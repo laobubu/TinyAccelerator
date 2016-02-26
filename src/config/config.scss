@@ -79,7 +79,7 @@ a {
 	min-height: 22pt;
 
 	li {
-		height: 22pt;
+		min-height: 22pt;
 		line-height: 22pt;
 		background: #eee;
 		color: #000;
@@ -92,8 +92,8 @@ a {
 		
 		&.mod-unavailable .mod-name {
 			color: #999 !important;
-			&::after {
-				content: ' (__MSG_unavailable__)' !important;
+			&::before {
+				content: ' (__MSG_unavailable__) ' !important;
 			}
 		}
 	}

@@ -36,8 +36,8 @@
       You can even make your own modules.
       
       1. Install corresponding Chrome extension. [Visit Module Gallery &raquo;](.)
-      2. Refresh this page and the new module will show up.
-      3. Enable it.
+      2. Refresh this page and the new module will show up below.
+      3. Drag it to "enabled modules" on the left. 
       
     zh: |
       你正在使用一个超赞的生产力工具！调教一下将使你事半功倍！
@@ -46,8 +46,9 @@
       你还可以自制你的专属模块。
       
       1. 安装对应的 Chrome 扩展程序。[访问模块大全 &raquo;](.)
-      2. 刷新此页面，那个新模块就会显示出来。
-      3. 启用它。
+      2. 刷新此页面，那个新模块就会在下面显示出来。
+      3. 将它拖到左边“已启用的模块”里。
+      
   TIP_MOVE: 
     en: "Drag and move items to change the priority"
     zh: "你可以拖动以改变优先级"
@@ -55,11 +56,23 @@
     en: |
       The module {{ mod.id }} is not loaded.
       
-      If the corresponding extension is installed, please disable and re-enable it.
+      If the corresponding extension is installed, try:
+      
+      1. Open Chrome Extension option page.
+      2. Disable the corresponding extension.
+      3. Re-enable it.
+      4. Go back and refresh this page.
+      
     zh: |
       模块 {{ mod.id }} 没有被载入。
       
-      如果已安装对应的浏览器扩展程序，试试看先禁用，然后重新启用它。
+      如果已安装对应的浏览器扩展程序，试试看：
+      
+      1. 打开 Chrome 扩展程序管理页
+      2. 禁用对应的扩展
+      3. 重新启用它
+      4. 回到此页面并刷新
+      
   Translate: 
     zh: "翻译"
   Translator: 

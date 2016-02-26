@@ -84,7 +84,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 var conf = {
 	mods: []
 }
-var enabled_mods = [] //a list of mod ID
 var loaded_mods = {}  //a dict
 
 function handleModuleResponse(msg) {
@@ -124,7 +123,6 @@ function handleConnection(port) {
 		}
 
 		//FIXME! DEBUG CODE! DO NOT PUBLISTH!
-		enabled_mods.push(id)
 		conf.mods.push(id)
 		
 		port.onMessage.addListener(handleModuleResponse)
@@ -187,7 +185,7 @@ chrome.runtime.onConnect.addListener((port) => {
 		delete port_cs[portID]
 	})
 	port.onMessage.addListener((msg) => {
-		enabled_mods.forEach((mod_id, index) => {
+		conf.mods.forEach((mod_id, index) => {
 			var mod = loaded_mods[mod_id]
 			var instanceRequest = Object.assign(msg.info, {
 				id: (portID + "|" + msg.id + "|" + index)
