@@ -51,7 +51,7 @@
       
       1. Install corresponding Chrome extension. [Visit Module Gallery &raquo;](.)
       2. Refresh this page and the new module will show up below.
-      3. Drag it to "enabled modules" on the left.
+      3. Drag it to "enabled modules" on the left. **It will have [senstive privileges](/help.html#privileges)! Don't enable untrusted modules!**
       
       If you want to disable an enabled module, just drag and drop it below.
       
@@ -65,7 +65,7 @@
       
       1. 安装对应的 Chrome 扩展程序。[访问模块大全 &raquo;](.)
       2. 刷新此页面，那个新模块就会在下面显示出来。
-      3. 将它拖到左边“已启用的模块”里。
+      3. 将它拖到左边“已启用的模块”里。**它将会获得[一些敏感权限](/help.html#privileges)！不要启用不可信的模块！**
       
       如果你想禁用某个已经启用的模块，把它拖到下面即可。
       

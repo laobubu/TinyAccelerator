@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../libs/tinyacc/basic.css">
   <link rel="stylesheet" href="config.css">
   <title>title</title>
 </head>
@@ -106,7 +107,14 @@
 <script src="../libs/marked/marked.min.js"></script>
 <script src="../libs/jquery-ui/jquery.min.js"></script>
 <script src="../libs/jquery-ui/jquery-ui.min.js"></script>
-<script src="translate.js"></script>
+<script src="../libs/tinyacc/translate.js"></script>
+<script>
+uniTranslateAll().then(() => {
+	var script = document.createElement('script')
+	script.src = "config.js"
+	document.body.appendChild(script)
+})
+</script>
 
 </body>
 </html>

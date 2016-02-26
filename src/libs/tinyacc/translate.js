@@ -60,9 +60,3 @@ function sendMessage(message) {
 		}, '*')
 	})
 }
-
-uniTranslateAll().then(() => {
-	var script = document.createElement('script')
-	script.src = "config.js"
-	document.body.appendChild(script)
-})

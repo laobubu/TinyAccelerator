@@ -1,0 +1,75 @@
+body {
+	font-family: "PingFang SC", "Noto Sans CJK SC", "Microsoft Yahei", "DejaVu Sans", Roboto, Arial, sans-serif;
+	font-size: 11pt;
+	line-height: 14pt;
+	margin: 0;
+}
+
+h1 {
+	font-weight: lighter;
+	font-size: 26pt;
+}
+
+h2 {
+	color: #666;
+	font-weight: normal;
+	font-size: 16pt;
+}
+
+.float-right {
+	float: right
+}
+
+img {
+	vertical-align: middle;
+}
+
+$link-color: #06A;
+a {
+	color: $link-color;
+	text-decoration: none;
+    text-shadow: -1px -1px 0 #fff, 
+				  1px -1px 0 #fff,
+				 -1px  1px 0 #fff, 
+				  1px  1px 0 #fff;
+    background-image: linear-gradient(to top, transparent, transparent 2px, $link-color 2px, $link-color 3px, transparent 3px);
+}
+
+
+
+
+
+.loader {
+	display: inline-block;
+	vertical-align: middle;
+  border: .25em solid transparent;
+  border-left-color: #06A;
+  -webkit-transform: translateZ(0);
+  -webkit-animation: load8 .6s infinite linear;
+}
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+#loading {
+	height: 2em;
+	overflow: hidden;
+	transition: .4s ease;
+	
+	&.hidden {
+		height: 0em;
+	}
+}
