@@ -33,7 +33,10 @@ window.addEventListener('message', function (event) {
 	switch (type) {
 		case 'i18n!':
 			translateTodo.forEach((item) => {
-				item.target.innerHTML = d.texts[item.key]
+				let html = d.texts[item.key]
+				let i18n = item.getAttribute('i18n')
+				if (i18n === "marked") html = marked(html)
+				item.target.innerHTML = html
 			})
 			afterTranslate()
 			break
