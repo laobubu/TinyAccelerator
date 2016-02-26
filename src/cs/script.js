@@ -1,6 +1,6 @@
 'use strict';
 
-(document.doctype && !document.xmlVersion) &&
+(document.doctype || !document.xmlVersion) &&
 (function () {
 	var container = document.createElement('div')
 	var box = {
