@@ -21,6 +21,8 @@
     zh: "已启用的模块"
   Install Modules:
     zh: "安装模块"
+  Manage Modules:
+    zh: "管理模块"
   Manage:
     zh: "管理"
   Modules: 
@@ -37,6 +39,8 @@
       Dozens of modules can be added to TinyAccelerator. Translator, Wikipedia, Digest and more. 
       You can even make your own modules.
       
+      Gonna install a new module?
+      
       1. Install corresponding Chrome extension. [Visit Module Gallery &raquo;](.)
       2. Refresh this page and the new module will show up below.
       3. Drag it to "enabled modules" on the left.
@@ -48,6 +52,8 @@
       
       各种神奇的模块都可以安装到 TinyAccelerator 上，譬如翻译、百科、文摘等等。
       你还可以自制你的专属模块。
+      
+      现在就安装一个新模块？
       
       1. 安装对应的 Chrome 扩展程序。[访问模块大全 &raquo;](.)
       2. 刷新此页面，那个新模块就会在下面显示出来。
