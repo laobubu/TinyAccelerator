@@ -1,5 +1,6 @@
 'use strict';
 
+(document.doctype && !document.xmlVersion) &&
 (function () {
 	var container = document.createElement('div')
 	var box = {
@@ -182,7 +183,7 @@
 			entryButton.setAttribute("tinyacc-instance", ins.id)
 			entryButton.textContent = ins.button.text
 			insertOrdered(entryButton, box.entry, order)
-			
+
 			self.button = entryButton
 
 			let event = ins.button.event
@@ -200,7 +201,7 @@
 			viewContent.className = "view-content"
 			viewContent.setAttribute("tinyacc-instance", ins.id)
 			viewContent.innerHTML = ins.view
-			
+
 			self.view = viewContent
 			insertOrdered(viewContent, box.view, order)
 
