@@ -3,7 +3,7 @@
 var translateTodo = []
 var afterTranslate
 
-function uniTranslateAll() {
+function uniTranslateAll(directMode) {
 	var x = [].slice.call(document.querySelectorAll('[i18n]'));
 	x.forEach.call(document.querySelectorAll('template'), (template) => {
 		var xt = template.content.querySelectorAll('[i18n]');
@@ -18,6 +18,17 @@ function uniTranslateAll() {
 			target: x[i]
 		})
 	}
+
+	if (directMode) {
+		translateTodo.forEach(function (item) {
+			let html = chrome.i18n.getMessage(item.key) || item.key
+			let i18n = item.target.getAttribute('i18n')
+			if (i18n === "marked") html = marked(html)
+			item.target.innerHTML = html
+		}, this)
+		return
+	}
+
 	window.postMessage({
 		type: "i18n?",
 		keys: Object.keys(keys)
@@ -59,4 +70,9 @@ function sendMessage(message) {
 			message: message
 		}, '*')
 	})
+}
+
+if (document.body.hasAttribute("i18n")) {
+	document.body.removeAttribute("i18n")
+	uniTranslateAll(true)
 }

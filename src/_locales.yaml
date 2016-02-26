@@ -110,3 +110,13 @@
   SEARCH_DESCRIPT: 
     en: "Universal search provider"
     zh: "通用的搜索按钮"
+  HELP_INTRO:
+    en: |
+      Welcome to use TinyAccelerator. The document is in progress. 
+      If you are interested in composing, please [help me on GitHub](https://github.com/laobubu/TinyAccelerator/blob/master/src/_locales.yaml).
+    zh: |
+      欢迎使用 TinyAccelerator。文档仍未完成。 
+      如果你有兴趣参与编写，请[在 GitHub 上助我一臂之力](https://github.com/laobubu/TinyAccelerator/blob/master/src/_locales.yaml)。
+  HELP_PRIVILDGES:
+    en: |
+      AAA
