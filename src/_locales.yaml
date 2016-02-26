@@ -30,11 +30,11 @@
     en: "Drag and move items to change the priority"
     zh: "你可以拖动以改变优先级"
   MOD_NOT_FOUND_EXPLAIN: 
-    en: >
+    en: |
       The module {{ mod.id }} is not loaded.
       
       If the corresponding extension is installed, please disable and re-enable it.
-    zh: >
+    zh: |
       模块 {{ mod.id }} 没有被载入。
       
       如果已安装对应的浏览器扩展程序，试试看先禁用，然后重新启用它。
@@ -46,8 +46,10 @@
     en: "A simple dictionary using Youdao API"
     zh: "一个使用有道词典API实现的词典"
   TRANSLATOR_DESCRIPT_FULL: 
-    en: "A dictionary using [Youdao Open API](http://fanyi.youdao.com/openapi?path=data-mode), providing translation from English to Chinese."
-    zh: "一个使用[有道词典API](http://fanyi.youdao.com/openapi?path=data-mode)实现的词典，能够将选中的英文词汇翻译为中文。"
+    en: |
+      A dictionary using [Youdao Open API](http://fanyi.youdao.com/openapi?path=data-mode), providing translation from English to Chinese.
+    zh: |
+      一个使用[有道词典API](http://fanyi.youdao.com/openapi?path=data-mode)实现的词典，能够将选中的英文词汇翻译为中文。
   Search: 
     zh: "搜索"
   SEARCH_DESCRIPT: 
