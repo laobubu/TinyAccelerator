@@ -24,7 +24,16 @@ img {
 	vertical-align: middle;
 }
 
-
+$link-color: #06A;
+a {
+	color: $link-color;
+	text-decoration: none;
+    text-shadow: -1px -1px 0 #fff, 
+				  1px -1px 0 #fff,
+				 -1px  1px 0 #fff, 
+				  1px  1px 0 #fff;
+    background-image: linear-gradient(to top, transparent, transparent 2px, $link-color 2px, $link-color 3px, transparent 3px);
+}
 
 
 
