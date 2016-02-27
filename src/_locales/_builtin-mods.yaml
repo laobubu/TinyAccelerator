@@ -14,6 +14,27 @@
   MT_API_SERVICE:
     en: "Service Provider"
     zh: "服务提供方"
+  MT_ENABLE_WHEN:
+    en: "Show up when select"
+    zh: "当选中以下内容时显示"
+  MT_TARGET_LANG:
+    en: "Target Language Code"
+    zh: "目标语言代号"
+  MT_TARGET_LANG_DESC:
+    en: "Leave empty if you don't know what it is"
+    zh: "若不知此为何物，请留空"
+  MT_engWord:
+    en: "English phrase"
+    zh: "英文词汇"
+  MT_engSentence:
+    en: "English sentence"
+    zh: "英文句子"
+  MT_other:
+    en: "Anything except English"
+    zh: "非英文的内容"
+  MT_any:
+    en: "Anything"
+    zh: "任何东西"
   Search: 
     zh: "搜索"
   SEARCH_DESCRIPT: 

@@ -15,6 +15,7 @@
     <span class="loader"></span>
     <span i18n>Loading</span>
   </div>
+  <h2 i18n>Basic</h2>
   <p>
     <label for="api" i18n>MT_API_SERVICE</label>
     <select id="api" t-bind="api">
@@ -22,6 +23,21 @@
       <option value="google">Google Translate</option>
     </select>
   </p>
+  <!--<p>
+    <label for="target" i18n>MT_TARGET_LANG</label>
+    <input type="text" id="target" t-bind="target" placeholder="auto">
+    <small i18n>MT_TARGET_LANG_DESC</small>
+  </p>-->
+  <p>
+    <label for="when" i18n>MT_ENABLE_WHEN</label>
+    <select t-bind="when" id="when">
+      <option value="0" i18n>MT_engWord</option>
+      <option value="1" i18n>MT_engSentence</option>
+      <option value="2" i18n>MT_other</option>
+      <option value="3" i18n>MT_any</option>
+    </select>
+  </p>
+  
   
 </article>
 

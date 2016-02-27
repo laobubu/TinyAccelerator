@@ -16,20 +16,38 @@ function ModsTranslator() {
 	_profile.url = "http://laobubu.net"
 	_profile.options = `chrome-extension://${chrome.runtime.id}/builtin-mods/translator/config.html`
 
+	var google = (str) => new Promise((res) => {
+		fetch('https://translate.google.com/m?hl=zh-CN&sl=auto&tl=' + chrome.i18n.getUILanguage() + '&ie=UTF-8&prev=_m&q=' + encodeURIComponent(str))
+			.then(r=> r.text())
+			.then(rt=> {
+				const key1 = '<div dir="ltr" class="t0">'
+				const key2 = '</div>'
+				var t = rt.substr(rt.indexOf(key1) + key1.length)
+				t = t.substr(0, t.indexOf(key2))
+
+				res([t])
+			})
+	})
+
+	var youdao = (str) => new Promise((res) => {
+		fetch('http://fanyi.youdao.com/openapi.do?keyfrom=laobubu&key=51276672&type=data&doctype=json&version=1.1&q=' + encodeURIComponent(str))
+			.then(res => res.json())
+			.then(json => {
+				res(json.basic.explains)
+			})
+	})
+
 	function _create_instance(req) {
 		return new Promise((resolve) => {
-			if (!/^\w+$/.test(req.text)) {
+			if (!/\w+/.test(req.text)) {
 				return
 			}
 
-			fetch('http://fanyi.youdao.com/openapi.do?keyfrom=laobubu&key=51276672&type=data&doctype=json&version=1.1&q=' + encodeURIComponent(req.text))
-				.then(res => res.json())
-				.then(json => {
-					if (json.errorCode !== 0) return
-
-					var view = `<h1>${req.text}</h1>`
+			google(req.text)
+				.then(results => {
+					var view = ''
 					view += '<ul>'
-					json.basic.explains.forEach((explain) => {
+					results.forEach((explain) => {
 						view += '<li>' + explain + '</li>'
 					})
 					view += '</ul>'
@@ -49,13 +67,15 @@ function ModsTranslator() {
 				})
 		})
 	}
-	
+
 	var defaultConf = {
-		api: "youdao"
+		api: "youdao",
+		when: "0",
+		target: ""
 	}
 	var conf = defaultConf;
 	function reloadConfig() {
-		config.get("user.translator").then((cc)=>{
+		config.get("user.translator").then((cc) => {
 			conf = cc || {}
 			conf.__proto__ = defaultConf
 		})
