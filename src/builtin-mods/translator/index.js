@@ -39,12 +39,28 @@ function ModsTranslator() {
 
 	function _create_instance(req) {
 		return new Promise((resolve) => {
-			if (!/\w+/.test(req.text)) {
+			var txt = req.text
+			if (txt.length > 200) return
+			
+			switch (~~conf.when) {
+				case 0: //english words
+					if (!/^[\w\s']+$/.test(txt)) return
+					break;
+				case 1: //english sentence
+					if (!/^[\w\s"'\.,:;!?]+$/.test(txt)) return
+					break;
+				case 2: //non-english
+					break
+			}
+			if (!/\w+/.test(txt)) {
 				return
 			}
 
-			google(req.text)
+			var api = (conf.api === "google") ? google : youdao;
+			api(txt)
 				.then(results => {
+					if (!results) return
+					
 					var view = ''
 					view += '<ul>'
 					results.forEach((explain) => {
@@ -58,7 +74,7 @@ function ModsTranslator() {
 						button: {
 							text: btn,
 							event: {
-								click: `window.open("http://dict.cn/${encodeURIComponent(req.text) }")`
+								click: `window.open("http://dict.cn/${encodeURIComponent(txt) }")`
 							}
 						}
 					}
