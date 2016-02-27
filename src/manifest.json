@@ -38,6 +38,7 @@
 	},
 	"background": {
 		"scripts": [
+			"libs/tinyacc/basic.js",
 			"background.js",
 			"builtin-mods/search/index.js",
 			"builtin-mods/translator/index.js"
