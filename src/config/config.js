@@ -22,6 +22,10 @@ var app = {
 
 Vue.config.debug = true
 
+function OpenURL(url) {
+	window.postMessage({ type: "open?", url: url }, "*")
+}
+
 app = new Vue({
 	el: '#app',
 	data: app,
@@ -35,9 +39,7 @@ app = new Vue({
 			app.conf.mods.push(id)
 			commitConf()
 		},
-		open: function (url) {
-			window.postMessage({ type: "open?", url: url }, "*")
-		}
+		open: OpenURL
 	},
 	events: {
 		disable: function (id) {
@@ -58,7 +60,8 @@ app = new Vue({
 			template: "#page-show",
 			props: ["mod"],
 			methods: {
-				disable: function (id) { this.$dispatch('disable', id) }
+				disable: function (id) { this.$dispatch('disable', id) },
+				open: OpenURL
 			},
 			filters: {
 				marked: marked
