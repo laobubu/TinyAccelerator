@@ -33,7 +33,7 @@ function ModsTranslator() {
 		fetch('http://fanyi.youdao.com/openapi.do?keyfrom=laobubu&key=51276672&type=data&doctype=json&version=1.1&q=' + encodeURIComponent(str))
 			.then(res => res.json())
 			.then(json => {
-				res(json.basic.explains)
+				res(json.basic ? json.basic.explains : json.translation)
 			})
 	})
 
