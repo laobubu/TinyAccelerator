@@ -21,7 +21,8 @@ function uniTranslateAll(directMode) {
 
 	if (directMode) {
 		translateTodo.forEach(function (item) {
-			let html = chrome.i18n.getMessage(item.key) || item.key
+			let html = chrome.i18n.getMessage(item.key)
+			if (!html) return
 			let i18n = item.target.getAttribute('i18n')
 			if (i18n === "marked") html = marked(html)
 			item.target.innerHTML = html

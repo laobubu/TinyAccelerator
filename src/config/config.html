@@ -114,7 +114,7 @@
 uniTranslateAll().then(() => {
 	window.document.addEventListener('click', function (ev) {
 		var e = ev.target
-		if (e.nodeName !== "A") return
+		if (e.nodeName !== "A" || !e.href) return
 		ev.preventDefault()
 		window.postMessage({ type: "open?", url: e.href }, "*")
 	}, true)
