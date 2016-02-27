@@ -11,11 +11,15 @@
 
 <article>
   <h1 i18n>Options</h1>
+  <div id="loading">
+    <span class="loader"></span>
+    <span i18n>Loading</span>
+  </div>
   <p>
     <label for="api" i18n>MT_API_SERVICE</label>
     <select id="api" t-bind="api">
-      <option value="youdao">Youdao</option>
-      <option value="google">Google</option>
+      <option value="youdao">Youdao Dict</option>
+      <option value="google">Google Translate</option>
     </select>
   </p>
   

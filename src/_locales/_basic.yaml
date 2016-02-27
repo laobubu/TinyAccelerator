@@ -3,6 +3,10 @@
     en: "TinyAccelerator"
   extDesc: #Extension description
     en: "Select a word and do action quickly"
+  Loading:
+    zh: "正在载入"
+  Working:
+    zh: "正在处理"
   Add: 
     zh: "添加"
   Delete:

@@ -17,6 +17,7 @@ function onInit(){
             config.set(conf_name, conf);
             chrome.runtime.sendMessage("ConfigUpdated");
         }
+        document.getElementById('loading').classList.add('hidden')
     });
 }
 config.onInit.addEventListener(onInit)
