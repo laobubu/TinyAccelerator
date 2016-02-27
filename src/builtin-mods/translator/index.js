@@ -12,6 +12,7 @@ function ModsTranslator() {
 	_profile.description = chrome.i18n.getMessage("TRANSLATOR_DESCRIPT")
 	_profile.fullDescription = chrome.i18n.getMessage("TRANSLATOR_DESCRIPT_FULL")
 	_profile.url = "http://laobubu.net"
+	_profile.options = `chrome-extension://${chrome.runtime.id}/builtin-mods/translator/config.html`
 
 	function _create_instance(req) {
 		return new Promise((resolve) => {
