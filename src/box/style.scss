@@ -92,6 +92,10 @@ h2 {
 				color: #EEE;
 			}
 		}
+		
+		.entry-btn:nth-child(1n+3) {
+			display: none;
+		}
 	}
 	
 	&.active{
@@ -100,6 +104,10 @@ h2 {
 		transition: .1s;
 		
 		#view {
+			display: block;
+		}
+		
+		#entry .entry-btn:nth-child(1n+3) {
 			display: block;
 		}
 	}
