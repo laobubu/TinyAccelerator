@@ -13,7 +13,7 @@ webView1.contentWindow.addEventListener('message', function (event) {
 				type: 'i18n!',
 				texts: texts
 			}, '*')
-			
+
 			break
 		case 'sm?':
 			/** a message proxy. require `message` and `timestamp` */
@@ -26,7 +26,7 @@ webView1.contentWindow.addEventListener('message', function (event) {
 			})
 			break
 		case 'open?':
-			window.open(d.url)
+			chrome.tabs.create({ url: d.url })
 			break
     }
 })
