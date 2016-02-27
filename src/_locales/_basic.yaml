@@ -1,8 +1,7 @@
 ---
-  extName: 
+  extName: #Extension name
     en: "TinyAccelerator"
-    description: "Extension name"
-  extDesc: 
+  extDesc: #Extension description
     en: "Select a word and do action quickly"
   Add: 
     zh: "添加"
@@ -30,3 +29,7 @@
     zh: "模块"
   Name: 
     zh: "名字"
+  Options:
+    zh: "选项"
+  Help:
+    zh: "帮助"

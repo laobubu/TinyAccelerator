@@ -73,6 +73,7 @@ function sendMessage(message) {
 }
 
 if (document.body.hasAttribute("i18n")) {
+	document.title = chrome.i18n.getMessage(document.title) || document.title
 	document.body.removeAttribute("i18n")
 	uniTranslateAll(true)
 }
