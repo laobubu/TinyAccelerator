@@ -1,9 +1,11 @@
 'use strict'
 
+/// <reference path="../../libs/tinyacc/basic.js" />
+
 function ModsTranslator() {
 
 	var _profile = {}
-	
+
 	var btn = chrome.i18n.getMessage("Translate")
 
 	_profile.id = "dict"
@@ -24,7 +26,7 @@ function ModsTranslator() {
 				.then(res => res.json())
 				.then(json => {
 					if (json.errorCode !== 0) return
-					
+
 					var view = `<h1>${req.text}</h1>`
 					view += '<ul>'
 					json.basic.explains.forEach((explain) => {
@@ -47,6 +49,27 @@ function ModsTranslator() {
 				})
 		})
 	}
+	
+	var defaultConf = {
+		api: "youdao"
+	}
+	var conf = defaultConf;
+	function reloadConfig() {
+		config.get("user.translator").then((cc)=>{
+			conf = cc || {}
+			conf.__proto__ = defaultConf
+		})
+	}
+
+	chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+		if (sender.url !== _profile.options) return
+		switch (msg.type || msg) {
+			case "ConfigUpdated":
+				reloadConfig()
+				break
+		}
+	})
+	config.onInit.addEventListener(reloadConfig)
 
 	var port = local_connect({ name: "module" })//chrome.runtime.connect()
 	port.postMessage({

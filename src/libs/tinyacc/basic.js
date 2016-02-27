@@ -1,6 +1,7 @@
 'use strict';
 
 var config = (() => {
+	var initListeners = []
 	var sys = {
 		impl: chrome.storage.local,
 		get: (name, defaultVal) => new Promise((res) => {
@@ -15,6 +16,12 @@ var config = (() => {
 			else setObj = n;
 			sys.impl.set(setObj, res);
 		}),
+		onInit: {
+			addEventListener: (l) => {
+				if (sys.inited) l()
+				else initListeners.push(l)
+			}
+		},
 		inited: false
 	};
 
@@ -22,7 +29,8 @@ var config = (() => {
 		if (!items['sys.local']) {
 			sys.impl = chrome.storage.sync;
 		}
-		sys.inited = true 
+		sys.inited = true
+		initListeners.forEach(l=> l())
 	});
 
 	return sys;
