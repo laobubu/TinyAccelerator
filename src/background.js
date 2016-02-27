@@ -61,12 +61,17 @@ var conf = {
 }
 var loaded_mods = {}  //a dict
 
-setTimeout(() => {
+function FetchConfig() {
+	if (!config.inited) {
+		setTimeout( FetchConfig, 100);
+		return;
+	}
 	config.get('user.conf').then((c) => {
 		console.log('RESOLVE', c);
 		c && (conf = c)
 	})
-}, 500) //YOU PROMISED!!!! YOU PROMISED!!!
+}
+FetchConfig()
 
 function handleModuleResponse(msg) {
 	if (msg.type === "instance") {
