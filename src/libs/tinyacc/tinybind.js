@@ -14,6 +14,9 @@ function TinyBind(object, parent) {
      */
     this.bindDict = [];
     this.object = object;
+    
+    /** a callback when data updated */
+    this.onUpdate = null;
 
     /** 
      * update a element or a field value
@@ -22,7 +25,10 @@ function TinyBind(object, parent) {
      * @param {boolean} v2m true if want to update module's field
      */
     this.exec = function(item, v2m) {
-        if (v2m) this.ptr(item.var, this.eleVal(item.ele));
+        if (v2m) {
+            this.ptr(item.var, this.eleVal(item.ele));
+            (typeof this.onUpdate === "function") && this.onUpdate(this)
+        }
         else this.eleVal(item.ele, this.ptr(item.var));
     }
 

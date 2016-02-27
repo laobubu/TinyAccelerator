@@ -11,6 +11,9 @@
       A dictionary using [Youdao Open API](http://fanyi.youdao.com/openapi?path=data-mode), providing translation from English to Chinese.
     zh: |
       一个使用[有道词典API](http://fanyi.youdao.com/openapi?path=data-mode)实现的词典，能够将选中的英文词汇翻译为中文。
+  MT_API_SERVICE:
+    en: "Service Provider"
+    zh: "服务提供方"
   Search: 
     zh: "搜索"
   SEARCH_DESCRIPT: 

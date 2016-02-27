@@ -7,22 +7,17 @@
   <link rel="stylesheet" href="../../libs/tinyacc/basic.css">
   <title>Translator</title>
 </head>
-<body i18n>
+<body config="user.translator" i18n>
 
 <article>
   <h1 i18n>Options</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat ullam facilis reprehenderit ipsa accusantium. Repellendus, porro consequuntur quis, aspernatur rem atque libero aliquid sapiente dolore, eius laborum non molestias! Veniam.</p>
-  
-  
-  <p><label><input type="checkbox" t-bind="lorem">test</label></p>
-  
-  <select t-bind="name">
-    <option value="a1">lorem#1</option>
-    <option value="a2">lorem#2</option>
-    <option>a3</option>
-    <option value="a4">lorem#4</option>
-    <option value="a5">lorem#5</option>
-  </select>
+  <p>
+    <label for="api" i18n>MT_API_SERVICE</label>
+    <select id="api" t-bind="api">
+      <option value="youdao">Youdao</option>
+      <option value="google">Google</option>
+    </select>
+  </p>
   
 </article>
 
