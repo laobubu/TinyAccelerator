@@ -34,6 +34,9 @@ app = new Vue({
 		enableMod: function (id) {
 			app.conf.mods.push(id)
 			commitConf()
+		},
+		open: function (url) {
+			window.postMessage({ type: "open?", url: url }, "*")
 		}
 	},
 	events: {

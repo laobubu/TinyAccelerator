@@ -10,17 +10,20 @@ interface Profile {
 	/** the author's name */
 	author: string;
 	
-	/** the URL to this accelerator's homepage */
-	url: string;
-	
 	/** one stentece describes this accelerator. */
 	description: string;
 	
+	/** the URL to this accelerator's homepage */
+	url?: string;
+	
 	/** the full description. Markdown is supported. */
-	fullDescription: string;
+	fullDescription?: string;
 	
 	/** the 48x48 image URL. base64 URL is supported. */
-	image: string;
+	image?: string;
+	
+	/** the options page URL. for example, `chrome-extension://xxxxxxxxx/options.html` */
+	options?: string;
 }
 
 /** 

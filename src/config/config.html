@@ -46,8 +46,9 @@
 							<div>{{ loaded_mods[id].profile.description }}</div>
 						</div>
 						<div class="mod-links">
-							<a i18n v-on:click="enableMod(id)">Enable</a>
 							<a v-show="loaded_mods[id].profile.url" i18n v-bind:href="loaded_mods[id].profile.url">Website</a>
+							<a v-show="loaded_mods[id].profile.options" i18n v-bind:href="loaded_mods[id].profile.options">Options</a>
+							<a i18n v-on:click="enableMod(id)">Enable</a>
 						</div>
 					</li>
 				</ul>
@@ -64,6 +65,7 @@
 		{{ mod.profile.name }}
 	</h1>
 	<p>
+		<button i18n v-show="mod.profile.options" v-on:click="open(mod.profile.options)">Options</button>
 		<button i18n v-on:click="disable(mod.id)">Disable</button>
 	</p>
 	<table class="mod-meta">
