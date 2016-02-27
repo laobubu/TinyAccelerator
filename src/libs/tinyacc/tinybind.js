@@ -1,6 +1,10 @@
 'use strict';
 
-/** TinyBind is a simple view-data binding lib */
+/** 
+ * TinyBind is a simple view-data binding lib 
+ * 
+ * @author laobubu
+ */
 
 function TinyBind(object, parent) {
     /** 
@@ -100,9 +104,3 @@ function TinyBind(object, parent) {
         ele.addEventListener('change', h, false);
     }
 }
-
-var cfg = {
-    lorem: false,
-    name: "a3"
-};
-var tb = new TinyBind(cfg, document);
