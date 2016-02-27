@@ -43,6 +43,7 @@ function TinyBind(object, parent) {
         var fieldList = name.split(".");
         var lastField = fieldList.pop();
         fieldList.forEach(function(name) {
+            if (typeof(p[name]) === "undefined") p[name] = {}
             p = p[name]
         });
         if (typeof(val) !== "undefined") p[lastField] = val;

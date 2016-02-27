@@ -30,6 +30,10 @@ img {
 	vertical-align: middle;
 }
 
+input, select {
+	padding: 4px 8px;
+}
+
 $link-color: #06A;
 a {
 	color: $link-color;
