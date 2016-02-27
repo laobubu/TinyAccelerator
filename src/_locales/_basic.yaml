@@ -1,0 +1,32 @@
+---
+  extName: 
+    en: "TinyAccelerator"
+    description: "Extension name"
+  extDesc: 
+    en: "Select a word and do action quickly"
+  Add: 
+    zh: "添加"
+  Delete:
+    zh: "删除"
+  Disable:
+    zh: "禁用"
+  Enable:
+    zh: "启用"
+  Website:
+    zh: "网站"
+  Author: 
+    zh: "作者"
+  disabled: 
+    zh: "已禁用"
+  unavailable: 
+    zh: "不可用"
+  Not Found: 
+    zh: "未找到"
+  Manage:
+    zh: "管理"
+  Modules: 
+    zh: "模块"
+  Module: 
+    zh: "模块"
+  Name: 
+    zh: "名字"

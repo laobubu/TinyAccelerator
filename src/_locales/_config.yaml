@@ -1,0 +1,63 @@
+---
+  CONFIG_CENTER: 
+    en: "Config Center"
+    zh: "配置中心"
+  Enabled Modules:
+    zh: "已启用的模块"
+  Install Modules:
+    zh: "安装模块"
+  Manage Modules:
+    zh: "管理模块"
+  CC_HELLO1: 
+    en: |
+      You are using a great productivity tool! 
+      Everything will be on-the-fly after adjusting some parameters.
+      
+      Dozens of modules can be added to TinyAccelerator. Translator, Wikipedia, Digest and more. 
+      You can even make your own modules.
+      
+      Gonna install a new module?
+      
+      1. Install corresponding Chrome extension. [Visit Module Gallery &raquo;](.)
+      2. Refresh this page and the new module will show up below.
+      3. Drag it to "enabled modules" on the left. **It will have [senstive privileges](/help.html#privileges)! Don't enable untrusted modules!**
+      
+      If you want to disable an enabled module, just drag and drop it below.
+      
+    zh: |
+      你正在使用一个超赞的生产力工具！调教一下将使你事半功倍！
+      
+      各种神奇的模块都可以安装到 TinyAccelerator 上，譬如翻译、百科、文摘等等。
+      你还可以自制你的专属模块。
+      
+      现在就安装一个新模块？
+      
+      1. 安装对应的 Chrome 扩展程序。[访问模块大全 &raquo;](.)
+      2. 刷新此页面，那个新模块就会在下面显示出来。
+      3. 将它拖到左边“已启用的模块”里。**它将会获得[一些敏感权限](/help.html#privileges)！不要启用不可信的模块！**
+      
+      如果你想禁用某个已经启用的模块，把它拖到下面即可。
+      
+  TIP_MOVE: 
+    en: "Drag and move items to change the priority"
+    zh: "你可以拖动以改变优先级"
+  MOD_NOT_FOUND_EXPLAIN: 
+    en: |
+      The module {{ mod.id }} is not loaded.
+      
+      If the corresponding extension is installed, try:
+      
+      1. Open Chrome Extension option page.
+      2. Disable the corresponding extension.
+      3. Re-enable it.
+      4. Go back and refresh this page.
+      
+    zh: |
+      模块 {{ mod.id }} 没有被载入。
+      
+      如果已安装对应的浏览器扩展程序，试试看：
+      
+      1. 打开 Chrome 扩展程序管理页
+      2. 禁用对应的扩展
+      3. 重新启用它
+      4. 回到此页面并刷新

@@ -30,10 +30,10 @@ i18n: $(DST_DIR)/_locales
 normal_files: $(DST_FILES)
 scss: $(DST_FILES_SCSS)
 
-$(DST_DIR)/_locales: $(SRC_DIR)/_locales.yaml
+$(DST_DIR)/_locales: $(SRC_DIR)/_locales
 	-rm -rf $(DST_DIR)/_locales
 	-mkdir -p $(DST_DIR)/_locales
-	$(JS_RUNTIME) tools/generate_locales.js $(SRC_DIR)/_locales.yaml $(DST_DIR)/_locales
+	$(JS_RUNTIME) tools/generate_locales.js $(SRC_DIR)/_locales $(DST_DIR)/_locales
 
 $(foreach scss, $(FILES_SCSS), $(eval $(call dynamic-bind, $(SRC_DIR)/$(scss), $(DST_DIR)/$(scss:.scss=.css) )))
 $(DST_FILES_SCSS): 

@@ -4,7 +4,7 @@ var args = process.argv.slice(2);
 
 if (args.length !== 2) {
 	console.log("Usage: generate_locales.js YAML OUTDIR");
-	console.log(" - YAML \t the path to yaml file.")
+	console.log(" - YAML \t the path to yaml file, or a directory that contains yaml files.")
 	console.log(" - OUTDIR \t the path to dir with '_locales'")
 	process.exit(1)
 }
@@ -18,8 +18,20 @@ var path = require('path')
 var fs = require('fs')
 var yaml = require('js-yaml')
 
-var source = yaml.safeLoad(fs.readFileSync(arg.yaml, 'UTF-8'))
+var source = {}
 var output = {}
+
+if (fs.statSync(arg.yaml).isDirectory()) {
+	fs.readdirSync(arg.yaml)
+		.filter(str => str.endsWith(".yaml"))
+		.forEach(filename => {
+			let fpath = path.join(arg.yaml, filename)
+			let tempObject = yaml.safeLoad(fs.readFileSync(fpath, 'UTF-8'))
+			source = Object.assign(source, tempObject)
+		})
+} else {
+	source = yaml.safeLoad(fs.readFileSync(arg.yaml, 'UTF-8'))
+}
 
 for (let key in source) {
 	var phase = source[key];

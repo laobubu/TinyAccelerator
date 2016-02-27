@@ -1,0 +1,18 @@
+---      
+  Translate: 
+    zh: "翻译"
+  Translator: 
+    zh: "翻译者"
+  TRANSLATOR_DESCRIPT: 
+    en: "A simple dictionary using Youdao API"
+    zh: "一个使用有道词典API实现的词典"
+  TRANSLATOR_DESCRIPT_FULL: 
+    en: |
+      A dictionary using [Youdao Open API](http://fanyi.youdao.com/openapi?path=data-mode), providing translation from English to Chinese.
+    zh: |
+      一个使用[有道词典API](http://fanyi.youdao.com/openapi?path=data-mode)实现的词典，能够将选中的英文词汇翻译为中文。
+  Search: 
+    zh: "搜索"
+  SEARCH_DESCRIPT: 
+    en: "Universal search provider"
+    zh: "通用的搜索按钮"

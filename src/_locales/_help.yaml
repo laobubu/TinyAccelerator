@@ -1,0 +1,39 @@
+---
+  HELP_INTRO:
+    en: |
+      # TinyAccelerator Document
+      
+      Welcome to use TinyAccelerator. The document is in progress. 
+      If you are interested in composing, please [help me on GitHub](https://github.com/laobubu/TinyAccelerator/blob/master/src/_locales/).
+    
+    zh: |
+      # TinyAccelerator 文档
+      
+      欢迎使用 TinyAccelerator。文档仍未完成。 
+      如果你有兴趣参与编写，请[在 GitHub 上助我一臂之力](https://github.com/laobubu/TinyAccelerator/blob/master/src/_locales/)。
+      
+  HELP_PRIVILEGES:
+    en: |
+      ## Privileges granted to Modules
+      
+      The enabled modules may gain these privileges:
+      
+      - **Get your selected content**
+      - **Change the appearance of webpages** - the modules may add codes to the webpages you are visiting
+      - **Do something on the role of TinyAccelerator** - the modules may execute some code, but the operator is TinyAccelerator!
+      - And more
+      
+      Only trusted modules shall be enabled! Please be aware!
+      
+    zh: |
+      ## 模块可得到的权限
+      
+      被启用的模块可以获得以下权限：
+      
+      - **获取你选中的内容**
+      - **改变页面的外观** - 这些模块将能够在你浏览的页面上插入代码
+      - **以 TinyAccelerator 的角色执行代码**
+      - 等等
+      
+      请务必只启用可信的模块！
+      
