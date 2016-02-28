@@ -3,9 +3,9 @@
 
 ## Defines
 
-Just a simple introducing of interfaces declared in the [Typedefined File]
+Just a simple introducing of interfaces declared in the [DefinitelyTyped File]
 
-[Typedefined File]: ../typings/tinyacc/tinyacc.d.ts
+[DefinitelyTyped File]: ../typings/tinyacc/tinyacc.d.ts
 
 ### Profile
 
@@ -54,7 +54,7 @@ TinyAccelerator and external modules follow Chrome Message API: <https://develop
 When a module starts, it shall open a `"module"` Port to TinyAccelerator and send its corresponding [Profile].
 
 ```javascript
-const TinyAccelerator_ID = "xxxxxxxxxxxxxxxxxxxxxxxx"
+const TinyAccelerator_ID = "fiddpgbhifocnehnnmkaodlabdbdpbjh"
 const Profile = {...}
 
 var port = chrome.runtime.connect(TinyAccelerator_ID, {name: "module"})
@@ -81,12 +81,6 @@ port.onMessage.addListener(function(msg) {
 				instance: instance
 			})
 		}
-	}
-	else if (msg.type === "profile") {
-		port.postMessage({
-			type: "profile",
-			profile: Profile
-		})
 	}
 })
 ```
