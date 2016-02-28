@@ -47,7 +47,7 @@
       
       If the corresponding extension is installed, try:
       
-      1. Open Chrome Extension option page.
+      1. Open <a v-bind:href="mod.chromeOptURL">Chrome Extension option page</a>.
       2. Disable the corresponding extension.
       3. Re-enable it.
       4. Go back and refresh this page.
@@ -57,7 +57,7 @@
       
       如果已安装对应的浏览器扩展程序，试试看：
       
-      1. 打开 Chrome 扩展程序管理页
+      1. 打开 <a v-bind:href="mod.chromeOptURL">Chrome 扩展程序管理页</a>
       2. 禁用对应的扩展
       3. 重新启用它
       4. 回到此页面并刷新

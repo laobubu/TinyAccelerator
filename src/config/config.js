@@ -32,8 +32,16 @@ app = new Vue({
 	methods: {
 		showMod: function (id) {
 			var mod = app.loaded_mods[id]
-			app.page.mod = mod || { id: id, profile: null }
-			app.page.name = mod ? "show" : "mod404"
+			if (mod) {
+				app.page.mod = mod
+				app.page.name = "show"
+			} else {
+				app.page.mod = {
+					id: id,
+					chromeOptURL: 'chrome://extensions/?id=' + id.split(':', 2)[0]
+				}
+				app.page.name = "mod404"
+			}
 		},
 		enableMod: function (id) {
 			app.conf.mods.push(id)
