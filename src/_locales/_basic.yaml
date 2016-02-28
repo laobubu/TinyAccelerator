@@ -2,14 +2,15 @@
   extName: #Extension name
     en: "TinyAccelerator"
   extDesc: #Extension description
-    en: "Select a word and do action quickly"
+    en: "Yet another better selection-search Extension for Chrome"
+    zh: "也许是目前更好的 Chrome 划词搜索"
   Loading:
     zh: "正在载入"
   Working:
     zh: "正在处理"
   Basic:
     zh: "基础"
-  Advanced:
+  Advanced: 
     zh: "进阶"
   Add: 
     zh: "添加"

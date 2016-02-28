@@ -4,6 +4,7 @@
 	"description": "__MSG_extDesc__",
 	"version": "1.0.0",
 	"icons": {
+		"64": "logo64.png",
 		"128": "logo.png"
 	},
 	"options_page": "config/index.html",
@@ -43,6 +44,6 @@
 			"builtin-mods/search/index.js",
 			"builtin-mods/translator/index.js"
 		],
-		"persistent": true //reloading is a disaster
+		"persistent": true
 	}
 }
