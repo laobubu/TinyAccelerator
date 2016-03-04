@@ -41,13 +41,14 @@ function ModsTranslator() {
 		return new Promise((resolve) => {
 			var txt = req.text
 			if (txt.length > 200) return
-			
+
 			switch (~~conf.when) {
 				case 0: //english words
-					if (!/^[\w\s']+$/.test(txt)) return
+					if (!/^[a-zA-Z][\w-]+$/.test(txt)) return
 					break;
 				case 1: //english sentence
-					if (!/^[\w\s"'\.,:;!?]+$/.test(txt)) return
+					if (!/^[-\w\s"'\.,:;!?\(\)]+$/.test(txt)) return
+					if (/\w\.[a-z]{2}/.test(txt)) return //Domains
 					break;
 				case 2: //non-english
 					break
@@ -60,7 +61,7 @@ function ModsTranslator() {
 			api(txt)
 				.then(results => {
 					if (!results) return
-					
+
 					var view = ''
 					view += '<ul>'
 					results.forEach((explain) => {
