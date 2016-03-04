@@ -31,6 +31,7 @@ app = new Vue({
 	data: app,
 	methods: {
 		showMod: function (id) {
+			if (modDragging) return
 			var mod = app.loaded_mods[id]
 			if (mod) {
 				app.page.mod = mod
@@ -47,9 +48,7 @@ app = new Vue({
 			app.conf.mods.push(id)
 			commitConf()
 		},
-		open: OpenURL
-	},
-	events: {
+		open: OpenURL,
 		disable: function (id) {
 			app.conf.mods.$remove(id)
 			app.page.name = "welcome"
@@ -68,7 +67,6 @@ app = new Vue({
 			template: "#page-show",
 			props: ["mod"],
 			methods: {
-				disable: function (id) { this.$dispatch('disable', id) },
 				open: OpenURL
 			},
 			filters: {
@@ -101,17 +99,24 @@ function commitConf() {
 	})
 }
 
-$(".mod-list").sortable({
+var modDragging = false
+
+$(".mod-list").delegate("li", "mousedown", () => {
+	app.page.name = "welcome"
+	$('#page-welcome').show()
+}).sortable({
 	forcePlaceholderSize: true,
 	connectWith: ".mod-list",
 	placeholder: "sortable-placeholder",
 	start: () => {
 		app.page.name = "welcome"
 		$(".mod-list").addClass("emphasis")
+		modDragging = true
 	},
 	stop: () => {
 		updateModuleSetting()
 		$(".mod-list").removeClass("emphasis")
+		modDragging = false
 	}
 }).disableSelection()
 

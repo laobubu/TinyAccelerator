@@ -54,8 +54,34 @@
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 		cursor: pointer;
 		padding: 0 5pt;
+		position: relative;
+		
+		.mod-links {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			font-size: 0.87em;
+			line-height: 22pt;
+			padding: 0 4px;
+			background: #fafafa;
+			display: none;
+			a {
+				background-image: none;
+				padding: 0px 4px;
+				text-shadow: none;
+				border: 1px solid transparent;
+				border-radius: 4px;
+				&:hover {
+					border-color: #06A;
+				}
+			}
+		}
+		
 		&:hover {
 			background: #fafafa;
+			.mod-links {
+				display: block;
+			}
 		}
 		
 		&.mod-unavailable .mod-name {
@@ -85,35 +111,18 @@
 			position: relative;
 			
 			.mod-links {
-				display: none;
-				position: absolute;
-				right: 0;
-				bottom: 0;
 				padding: 4pt;
 				font-size: 0.87em;
 				line-height: 1.4em;
 				text-align: right;
-				background: inherit;
-				a {
-					background-image: none;
-					padding: 2px 6px;
+				a{
 					display: inline-block;
-					text-shadow: none;
-					border: 1px solid transparent;
-					border-radius: 4px;
-					&:hover {
-						border-color: #06A;
-					}
+					padding: 2px 6px;
 				}
-			}
-			
-			&:hover .mod-links {
-				display: block;
 			}
 			
 			.mod-meta {
 				color: #666;
-				font-size: 0.87em;
 				line-height: 1.4em;
 				padding: 5pt;
 				> div {

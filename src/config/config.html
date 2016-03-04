@@ -17,9 +17,18 @@
 		</div>
 		<h2 i18n>Enabled Modules</h2>
 		<ul id="enabled-mods" class="mod-list">
-			<li v-for="id in conf.mods" v-bind:data-id="id" v-on:click="showMod(id)" v-bind:class="loaded_mods[id] ? '' : 'mod-unavailable'">
+			<li v-for="id in conf.mods" 
+				v-bind:data-id="id" 
+				v-bind:class="loaded_mods[id] ? '' : 'mod-unavailable'"
+				v-on:mouseenter="showMod(id)"
+				v-on:click="showMod(id)"
+			>
 				<span v-if="loaded_mods[id]" class="mod-name">{{ loaded_mods[id].profile.name }}</span>
 				<span v-else class="mod-name">…{{ id.substr(id.indexOf(':')) }}</span>
+				<span class="mod-links">
+					<a i18n v-if="loaded_mods[id] && loaded_mods[id].profile.options" v-bind:href="loaded_mods[id].profile.options">Options</a>
+					<a i18n v-on:click="disable(id)">Disable</a>
+				</span>
 			</li>
 		</ul>
 		<small i18n>TIP_MOVE</small>
@@ -31,7 +40,7 @@
 			<div class="loader"></div>
 			<span i18n>Working</span>
 		</div>
-		<div  v-show="page.name == 'welcome'"   >
+		<div id="page-welcome" v-show="page.name == 'welcome'">
 			<h1>
 				<img src="/image/package-64.png" alt="" width="64" height="64">
 				<span i18n>Manage Modules</span>
@@ -64,10 +73,6 @@
 		<img v-bind:src="mod.profile.image || '/image/apps-64.png'" alt="" width="64" height="64">
 		{{ mod.profile.name }}
 	</h1>
-	<p>
-		<button i18n v-show="mod.profile.options" v-on:click="open(mod.profile.options)">Options</button>
-		<button i18n v-on:click="disable(mod.id)">Disable</button>
-	</p>
 	<table class="mod-meta">
 		<tr>
 			<th i18n>ID</th>
