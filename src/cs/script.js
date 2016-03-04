@@ -67,11 +67,8 @@
 		box.visible = visibile
 
 		container.style.display = visibile ? 'block' : 'none'
-		if (visibile) {
-			setBoxPosition()
-		}
 	}
-	function setBoxPosition() {
+	function setBoxPosition(refEvent) {
 		if (!box.visible) return
 
 		var rects = box.surroundingRects
@@ -79,6 +76,26 @@
 
 		var left = rect.left
 		var top = rect.top
+
+		if (refEvent && refEvent.pageX) {
+			let refX = refEvent.pageX - document.body.scrollLeft,
+				refY = refEvent.pageY - document.body.scrollTop
+			left = refX
+			for (let i = 0; i !== rects.length; i++) {
+				let ri = rects[i]
+				if (ri.left <= refX && refX <= ri.right) {
+					if (
+						Math.abs(rect.top + (rect.height >> 1) - refY)
+						>
+						Math.abs(ri.top + (ri.height >> 1) - refY)
+						) {
+						top = ri.top
+						rect = ri
+					}
+					break
+				}
+			}
+		}
 
 		if ((top - box.size.height) < 0) {
 			top += rect.height
@@ -98,7 +115,7 @@
 		container.style.top = (top + document.body.scrollTop) + 'px'
 	}
 
-	function onSelectionChange() {
+	function onSelectionChange(ev) {
 		var range = selection.rangeCount && selection.getRangeAt(0)
 
 		if (selection.isCollapsed) {
@@ -128,7 +145,7 @@
 		box.entry.innerHTML = ""
 		box.surroundingRects = range.getClientRects()
 		setBoxVisibility(true)
-		setBoxPosition()
+		setBoxPosition(ev)
 
 		var request = {
 			id: genID(),
@@ -239,7 +256,7 @@
 		if (box.ghost && ev.target !== container) {
 			box.ghost = false
 			box.div.classList.remove('ghost')
-			onSelectionChange()
+			onSelectionChange(ev)
 		}
 	}, true)
 
