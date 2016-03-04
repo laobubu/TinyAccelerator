@@ -16,7 +16,8 @@
 		surroundingRects: [],
 
 		isHiding: 0,
-		hideAfter: 1000
+		hideAfter: 1000,
+		size: { width: 250, height: 150 }
 	}
 	var root = container.createShadowRoot()
 
@@ -42,6 +43,8 @@
 			}
 			box.isHiding = setTimeout(hidingFunc, box.hideAfter)
 		}, true)
+		container.setAttribute("style", "z-index: 2147483647; display: none; position: absolute; width: " + box.size.width + "px")
+		box.div.style.maxHeight = box.size.height + "px"
 	}
 
 	chrome.runtime.sendMessage("box", (box_info) => {
@@ -51,6 +54,7 @@
 		box.div = root.querySelector('#box')
 		box.view = root.querySelector('#view')
 		box.entry = root.querySelector('#entry')
+		box.size = box_info.size
 
 		postInit()
 	})
@@ -58,8 +62,6 @@
 	var selection = window.getSelection()
 	var tempDiv = document.createElement('div')
 
-	container.style.right = '0px'
-	container.style.position = 'absolute'
 	function setBoxVisibility(visibile) {
 		if (visibile === box.visible) return
 		box.visible = visibile
@@ -78,17 +80,18 @@
 		var left = rect.left
 		var top = rect.top
 
-		var boxHeight = 100 * 4 / 3
-
-		if ((top - boxHeight) < 0) {
+		if ((top - box.size.height) < 0) {
+			top += rect.height
 			box.div.classList.add('vertical-reverse')
-			top = rect.top + rect.height
 		} else {
 			box.div.classList.remove('vertical-reverse')
 		}
 
-		if ((left + box.div.offsetWidth) > window.innerWidth) {
-			left = window.innerWidth - box.div.offsetWidth
+		if ((left + box.size.width) > window.innerWidth) {
+			box.div.classList.add('horizontal-reverse')
+			left -= box.size.width
+		} else {
+			box.div.classList.remove('horizontal-reverse')
 		}
 
 		container.style.left = (left + document.body.scrollLeft) + 'px'

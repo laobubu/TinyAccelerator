@@ -19,6 +19,7 @@ h2 {
 	font-family: "PingFang SC", "Noto Sans CJK SC", "Microsoft Yahei", "DejaVu Sans", Roboto, Arial, sans-serif;
 	font-size: 10pt;
 	line-height: 1.7em;
+	text-align: left;
 	
 	border: 1px solid rgba(0, 0, 0, 0.6);
 	border-radius: 5px;
@@ -27,11 +28,7 @@ h2 {
 	color: #000;
 	
 	box-sizing: content-box;
-	max-width: 200pt;
-	max-height: 100pt;
-	
 	position: absolute;
-	z-index: 2147483647;
 	left: 0;
 	bottom: 0;
 	
@@ -124,6 +121,8 @@ h2 {
 	}
 	
 	&.horizontal-reverse {
+		left: initial;
+		right: 0;
 		#entry {
 			flex-direction: row-reverse;
 		}

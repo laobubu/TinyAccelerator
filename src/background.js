@@ -1,7 +1,7 @@
 'use strict';
 /// <reference path="libs/tinyacc/basic.js" />
 
-var box = { html: '', style: '' };
+var box = { html: '', style: '', size: { width: 250, height: 150 } };
 var styleDefault, styleUser;
 
 Promise.all([
@@ -46,6 +46,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 			} else {
 				conf = msg.data
 				config.set('user.conf', conf)
+				AfterConfigUpdate()
 				sendResponse(true)
 			}
 			break
@@ -57,15 +58,22 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 var conf = {
 	mods: [
 		(chrome.runtime.id + ":search")
-	]
+	],
+	"box.width": 250,
+	"box.height": 150
 }
 var loaded_mods = {}  //a dict
 
-config.onInit.addEventListener(function(){
+config.onInit.addEventListener(function () {
 	config.get('user.conf').then((c) => {
-		c && (conf = c)
+		c && Object.assign(conf, c) && AfterConfigUpdate()
 	})
 })
+
+function AfterConfigUpdate() {
+	box.size.width = conf["box.width"]
+	box.size.height = conf["box.height"]
+}
 
 function handleModuleResponse(msg) {
 	if (msg.type === "instance") {
