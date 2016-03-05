@@ -34,3 +34,5 @@ declare var app: {
 		mod?: modDictItem
 	}
 };
+
+declare function local_connect(options: { name: string }): chrome.runtime.Port;
