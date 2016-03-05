@@ -79,20 +79,18 @@
 
 		if (refEvent && refEvent.pageX) {
 			let refX = refEvent.pageX - document.body.scrollLeft,
-				refY = refEvent.pageY - document.body.scrollTop
+				refY = refEvent.pageY - document.body.scrollTop,
+				nearestDistance = 0x1A0BB00
 			left = refX
 			for (let i = 0; i !== rects.length; i++) {
 				let ri = rects[i]
 				if (ri.left <= refX && refX <= ri.right) {
-					if (
-						Math.abs(rect.top + (rect.height >> 1) - refY)
-						>
-						Math.abs(ri.top + (ri.height >> 1) - refY)
-						) {
+					let riDistance = Math.abs(ri.top + (ri.height / 2) - refY)
+					if (riDistance < nearestDistance) {
 						top = ri.top
 						rect = ri
+						nearestDistance = riDistance
 					}
-					break
 				}
 			}
 		}
