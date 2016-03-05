@@ -17,7 +17,8 @@
 
 		isHiding: 0,
 		hideAfter: 1000,
-		size: { width: 250, height: 150 }
+		size: { width: 250, height: 150 },
+		position: { x: 0, y: 0 }
 	}
 	var root = container.createShadowRoot()
 
@@ -68,7 +69,7 @@
 
 		container.style.display = visibile ? 'block' : 'none'
 	}
-	function setBoxPosition(refEvent) {
+	function setBoxPosition() {
 		if (!box.visible) return
 
 		var rects = box.surroundingRects
@@ -77,23 +78,23 @@
 		var left = rect.left
 		var top = rect.top
 
-		if (refEvent && refEvent.pageX) {
-			let refX = refEvent.pageX - document.body.scrollLeft,
-				refY = refEvent.pageY - document.body.scrollTop,
-				nearestDistance = 0x1A0BB00
-			left = refX
-			for (let i = 0; i !== rects.length; i++) {
-				let ri = rects[i]
-				if (ri.left <= refX && refX <= ri.right) {
-					let riDistance = Math.abs(ri.top + (ri.height / 2) - refY)
-					if (riDistance < nearestDistance) {
-						top = ri.top
-						rect = ri
-						nearestDistance = riDistance
-					}
+		// if (refPosition) {
+		let refX = box.position.x,
+			refY = box.position.y,
+			nearestDistance = 0x1A0BB00
+		left = refX
+		for (let i = 0; i !== rects.length; i++) {
+			let ri = rects[i]
+			if (ri.left <= refX && refX <= ri.right) {
+				let riDistance = Math.abs(ri.top + (ri.height / 2) - refY)
+				if (riDistance < nearestDistance) {
+					top = ri.top
+					rect = ri
+					nearestDistance = riDistance
 				}
 			}
 		}
+		// }
 
 		if ((top - box.size.height) < 0) {
 			top += rect.height
@@ -114,15 +115,6 @@
 	}
 
 	function onSelectionChange(ev) {
-		var currentTime = +new Date()
-		if (onSelectionChange.trigNext > currentTime) {
-			onSelectionChange.trigArgCache = ev
-			if (onSelectionChange.trigTimeout) return
-			onSelectionChange.trigTimeout = setTimeout(onSelectionChange.trigTimeoutFn, onSelectionChange.trigNext - currentTime)
-			return
-		}
-		onSelectionChange.trigNext = currentTime + onSelectionChange.trigSpan
-
 		var range = selection.rangeCount && selection.getRangeAt(0)
 
 		if (selection.isCollapsed) {
@@ -138,6 +130,15 @@
 
 		if (box.ghost) return
 
+		var currentTime = +new Date()
+		if (onSelectionChange.trigNext > currentTime) {
+			onSelectionChange.trigArgCache = ev
+			if (onSelectionChange.trigTimeout) return
+			onSelectionChange.trigTimeout = setTimeout(onSelectionChange.trigTimeoutFn, onSelectionChange.trigNext - currentTime)
+			return
+		}
+		onSelectionChange.trigNext = currentTime + onSelectionChange.trigSpan
+
 		var content = range.cloneContents()
 
 		tempDiv.innerHTML = ''
@@ -152,7 +153,7 @@
 		box.entry.innerHTML = ""
 		box.surroundingRects = range.getClientRects()
 		setBoxVisibility(true)
-		setBoxPosition(ev)
+		setBoxPosition()
 
 		var request = {
 			id: genID(),
@@ -172,7 +173,7 @@
 	onSelectionChange.trigNext = 0
 	onSelectionChange.trigArgCache = null
 	onSelectionChange.trigTimeout = null
-	onSelectionChange.trigTimeoutFn = function() {
+	onSelectionChange.trigTimeoutFn = function () {
 		onSelectionChange.trigTimeout = null
 		onSelectionChange(onSelectionChange.trigArgCache)
 	}
@@ -271,7 +272,10 @@
 		if (box.ghost && ev.target !== container) {
 			box.ghost = false
 			box.div.classList.remove('ghost')
+			box.position.x = ev.pageX - document.body.scrollLeft
+			box.position.y = ev.pageY - document.body.scrollTop
 			onSelectionChange(ev)
+			setBoxPosition()
 		}
 	}, true)
 
