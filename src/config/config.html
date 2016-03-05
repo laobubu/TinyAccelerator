@@ -46,8 +46,8 @@
 				<img src="/image/package-64.png" alt="" width="64" height="64">
 				<span i18n>Manage Modules</span>
 			</h1>
-			<section i18n="marked">CC_HELLO1</section>
 			<section>
+				<div i18n="marked">CC_HELLO1</div>
 				<ul class="mod-list mod-list-wall" id="disabled-mods">
 					<li v-for="id in disabled_mods" v-bind:data-id="id">
 						<div class="mod-name">{{ loaded_mods[id].profile.name }}</div>
@@ -70,6 +70,13 @@
 				<img src="/image/preference-64.png" alt="" width="64" height="64">
 				<span i18n>Preference</span>
 			</h1>
+			<section>
+				<h2 i18n>Manage Modules</h2>
+				<p> 
+					<span i18n>CC_MM_INTRODUCE</span>
+					<a href="" i18n onclick="app.page.name = 'welcome'">Click to Open</a>
+				</p>
+			</section>
 			<section>
 				<h2 i18n>CC_BOXSIZE</h2>
 				<div class="pref-boxsize">
@@ -136,8 +143,8 @@
 uniTranslateAll().then(() => {
 	window.document.addEventListener('click', function (ev) {
 		var e = ev.target
-		if (e.nodeName !== "A" || !e.href) return
-		ev.preventDefault()
+		if (!e.getAttribute("href")) ev.preventDefault()
+		if (e.nodeName !== "A" || !e.getAttribute("href")) return
 		window.postMessage({ type: "open?", url: e.href }, "*")
 	}, true)
 	var script = document.createElement('script')
