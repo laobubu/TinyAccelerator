@@ -114,6 +114,15 @@
 	}
 
 	function onSelectionChange(ev) {
+		var currentTime = +new Date()
+		if (onSelectionChange.trigNext > currentTime) {
+			onSelectionChange.trigArgCache = ev
+			if (onSelectionChange.trigTimeout) return
+			onSelectionChange.trigTimeout = setTimeout(onSelectionChange.trigTimeoutFn, onSelectionChange.trigNext - currentTime)
+			return
+		}
+		onSelectionChange.trigNext = currentTime + onSelectionChange.trigSpan
+
 		var range = selection.rangeCount && selection.getRangeAt(0)
 
 		if (selection.isCollapsed) {
@@ -158,6 +167,14 @@
 
 
 		port.postMessage(request)
+	}
+	onSelectionChange.trigSpan = 300
+	onSelectionChange.trigNext = 0
+	onSelectionChange.trigArgCache = null
+	onSelectionChange.trigTimeout = null
+	onSelectionChange.trigTimeoutFn = function() {
+		onSelectionChange.trigTimeout = null
+		onSelectionChange(onSelectionChange.trigArgCache)
 	}
 
 	function insertOrdered(ele, parent, order) {
