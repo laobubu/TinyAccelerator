@@ -14,6 +14,7 @@
 	<div id="app-select">
 		<div class="float-right">
 			<button i18n v-show="page.name != 'welcome'" onclick="app.page.name = 'welcome'">Manage</button>
+			<button i18n v-show="page.name != 'preference'" onclick="app.page.name = 'preference'">Preference</button>
 		</div>
 		<h2 i18n>Enabled Modules</h2>
 		<ul id="enabled-mods" class="mod-list">
@@ -21,7 +22,7 @@
 				v-bind:data-id="id" 
 				v-bind:class="loaded_mods[id] ? '' : 'mod-unavailable'"
 				v-on:mouseenter="showMod(id)"
-				v-on:click="showMod(id)"
+				v-on:click="showMod(id, true)"
 			>
 				<span v-if="loaded_mods[id]" class="mod-name">{{ loaded_mods[id].profile.name }}</span>
 				<span v-else class="mod-name">…{{ id.substr(id.indexOf(':')) }}</span>
@@ -63,6 +64,23 @@
 				</ul>
 			</section>
 		</div>
+		
+		<div id="page-preference" v-show="page.name == 'preference'">
+			<h1>
+				<img src="/image/preference-64.png" alt="" width="64" height="64">
+				<span i18n>Preference</span>
+			</h1>
+			<section>
+				<h2 i18n>CC_BOXSIZE</h2>
+				<div class="pref-boxsize">
+					<p class="pref-boxsize-page"><span class="pref-boxsize-page-selected">Lorem ipsum</span> dolor sit amet, consectetur adipisicing elit. Esse porro nulla quo perspiciatis quasi aspernatur qui impedit facere eveniet, placeat alias, optio enim eaque culpa, voluptate ducimus praesentium ut neque!</p>
+					<div id="pref-boxsize-box">
+						<div class="pref-boxsize-box-content" i18n="marked">CC_BOXSIZE_NOTICE</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		
 		<page-show     v-if="page.name == 'show'"      v-bind:mod="page.mod"></page-show>
 		<page-mod404   v-if="page.name == 'mod404'"    v-bind:mod="page.mod"></page-mod404>
 	</div>

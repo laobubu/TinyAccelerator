@@ -15,7 +15,7 @@ var app = {
 	disabled_mods: [],
 	saving: false,
 	page: {
-		name: "welcome",
+		name: "preference",
 		mod: null
 	}
 }
@@ -30,8 +30,9 @@ app = new Vue({
 	el: '#app',
 	data: app,
 	methods: {
-		showMod: function (id) {
+		showMod: function (id, force) {
 			if (modDragging) return
+			if (!force && app.page.name === 'preference') return
 			var mod = app.loaded_mods[id]
 			if (mod) {
 				app.page.mod = mod
@@ -120,5 +121,25 @@ $(".mod-list").delegate("li", "mousedown", () => {
 	}
 }).disableSelection()
 
+
+var prefBoxsizeBox = $("#pref-boxsize-box").resizable({
+	handles: "se",
+	minWidth: 150,
+	minHeight: 80,
+	stop: (ev) => {
+		app.conf['box.width'] = prefBoxsizeBox.outerWidth()
+		app.conf['box.height'] = prefBoxsizeBox.outerHeight()
+		commitConf()
+	}
+})
+
+$('.pref-boxsize').disableSelection()
+
 sendMessage("loaded_mods").then((loaded_mods) => { app.loaded_mods = loaded_mods })
-sendMessage("conf").then((conf) => { app.conf = conf })
+sendMessage("conf").then((conf) => {
+	app.conf = conf
+	prefBoxsizeBox.css({
+		width: app.conf['box.width'] + 'px',
+		height: app.conf['box.height'] + 'px'
+	})
+})

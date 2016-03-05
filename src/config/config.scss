@@ -137,3 +137,67 @@
 		}
 	}
 }
+
+.pref-boxsize{
+	overflow: auto;
+	position: relative;
+	height: 300px;
+	background: #eee;
+	
+	p.pref-boxsize-page {
+		margin: 10px;
+		line-height: 18px;
+		font-size: 14px;
+		text-indent: 30px;
+		color: #CCC;
+		
+		span.pref-boxsize-page-selected {
+			background: lighten($color: #06A, $amount: 30%);
+			color: #FFF;
+		}
+	}
+	
+	#pref-boxsize-box {
+		position: absolute;
+		left: 40px;
+		top: 28px;
+		background: #fafafa;
+		border-radius: 3px;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+		
+		.ui-resizable-se {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 0px;
+			height: 0px;
+			border: 5px solid #666;
+			border-top-color: transparent;
+			border-left-color: transparent;
+			cursor: se-resize;
+		}
+		
+		.pref-boxsize-box-content {
+			overflow: auto;
+			height: 100%;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			
+			&:before {
+				color: #666;
+				content: 'Tooltip';
+				left: 0;
+				top: 0;
+				right: 0;
+				padding: .5em;
+				line-height: 1em;
+				background-image: linear-gradient(transparent, rgba(0,0,0,0.1));
+			}
+			
+			p {
+				margin: 5px;
+			}
+		}
+	}
+}

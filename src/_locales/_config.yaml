@@ -61,3 +61,15 @@
       2. 禁用对应的扩展
       3. 重新启用它
       4. 回到此页面并刷新
+  CC_BOXSIZE:
+    en: "Box size"
+    zh: "盒子大小"
+  CC_BOXSIZE_NOTICE:
+    en: |
+      This is the maximum size of your information boxes.
+      
+      Adjust the size by dragging the triangular shape on the southeastern corner.
+    zh: |
+      这就是你的信息盒子的最大尺寸。
+      
+      通过拖动右下角的三角形来调整大小。
