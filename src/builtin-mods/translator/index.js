@@ -121,11 +121,6 @@ function ModsTranslator() {
 					type: "instance",
 					instance: instance
 				})
-				instance.button.text = "agaga"
-				port.postMessage({
-					type: "instance",
-					instance: instance
-				})
 			})
 		}
 		else if (msg.type === "profile") {
