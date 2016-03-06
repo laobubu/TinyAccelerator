@@ -3,13 +3,13 @@ JS_RUNTIME = node
 SRC_DIR = src
 DST_DIR = dist
 
-SPECIAL_FILES = . _%
+SPECIAL_FILES = . _% %.scss
 
 FILES := $(shell cd $(SRC_DIR) && find -name '*' )
 FILES := $(subst ./,,$(FILES))
 
 FILES_SCSS := $(filter %.scss, $(FILES))
-FILES := $(filter-out $(SPECIAL_FILES) $(SCSS_FILES),$(FILES))
+FILES := $(filter-out $(SPECIAL_FILES),$(FILES))
 
 SRC_FILES := $(addprefix $(SRC_DIR)/, $(FILES))
 DST_FILES := $(addprefix $(DST_DIR)/, $(FILES))
@@ -30,10 +30,11 @@ i18n: $(DST_DIR)/_locales
 normal_files: $(DST_FILES)
 scss: $(DST_FILES_SCSS)
 
+clean:
+	rm -rf $(DST_DIR)
+
 pack: dist
-	rm -f $(DST_DIR)/libs/vue/vue.js
-	sed -i $(DST_DIR)/config/config.html -e 's/vue.js/vue.min.js/'
-	for i in `find $(DST_DIR) \( -name '*.js' ! -name '*.min.js' \)`; do uglifyjs -m -c drop_console $$i -o $$i ; done
+	@$(SHELL) tools/pack.sh
 
 $(DST_DIR)/_locales: $(wildcard $(SRC_DIR)/_locales/*)
 	-rm -rf $(DST_DIR)/_locales
