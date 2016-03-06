@@ -8,7 +8,7 @@ A powerful and flexible Chrome selection-search extension.
 
 ## Develop
 
-[If you are just interested in **making a module**, read this.](node/make-a-module.md)
+[If you are just interested in **making a module**, read this.](note/make-a-module.md)
 
 VSCode is favored. Besides, to make the project, you shall have:
 
