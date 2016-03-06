@@ -34,8 +34,11 @@ interface Profile {
 type EventInfo = { [eventName: string]: string };
 
 interface Instance {
-	/** the HTML of the View */
-	view?: string;
+	/** the view */
+	view?: string | {
+		html: string;
+		event?: EventInfo;
+	};
 	
 	/** the entry button on #entry */
 	button: {
@@ -48,6 +51,9 @@ interface Instance {
 	
 	/** the id string. given when TinyAcc requests for this instance */
 	id: string;
+	
+	/** the js content that runs when button and view are created. `this.view` and `this.button` are available. */
+	onCreated?: string;
 }
 
 interface InstanceRequest {

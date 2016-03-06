@@ -236,10 +236,19 @@
 			var viewContent = document.createElement('div')
 			viewContent.className = "view-content"
 			viewContent.setAttribute("tinyacc-instance", ins.id)
-			viewContent.innerHTML = ins.view
+			viewContent.innerHTML = ins.view.html || ins.view
 
 			self.view = viewContent
 			insertOrdered(viewContent, box.view, order)
+
+			let event = ins.view.event
+			if (event) {
+				Object.keys(event).forEach((eventName) => {
+					let eventBody = event[eventName]
+					let eventHandler = new Function("event", eventBody)
+					viewContent.addEventListener(eventName, eventHandler.bind(self))
+				})
+			}
 
 			if (entryButton) {
 				//if have a button and has a low priority, then hide it!!
@@ -251,6 +260,10 @@
 					monodrama(self)
 				})
 			}
+		}
+		
+		if (ins.onCreated) {
+			(new Function(ins.onCreated)).call(self)
 		}
 	})
 
