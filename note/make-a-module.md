@@ -37,15 +37,18 @@ Module->TinyAcc:   Instance
 TinyAcc->User:     Display
 ```
 
-(\*) If can't generate corresponding content, Module may refuse responding System and the flow stops.
+(\*) If can't generate content, a module may not respond to System and the flow stops.
 
 ### When content get unselected
 
 The box will be hidden. The view and button that assigned to the Instance, will be removed from the box.
 
-The best practice is that not creating more reference to the button or view. Once their content get updated, everything shall be static. Otherwise, GC and memory might have a bad day.
+You may use `<script>` tags, but please try not to create references to the button or view.
+Static content is always the best, or GC and memory might give you a bad day.
 
 ## Implement
+
+Here is an example/quickstart implement: <https://github.com/laobubu/TinyAccExampleModule/>
 
 ### Connect to TinyAccelerator
 
