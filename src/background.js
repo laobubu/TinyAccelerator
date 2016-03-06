@@ -77,7 +77,7 @@ function AfterConfigUpdate() {
 
 function handleModuleResponse(msg) {
 	if (msg.type === "instance") {
-		DEBUG && console.log("module response!", msg.instance.id, msg.instance)
+		console.log("module response!", msg.instance.id, msg.instance)
 		var infos = msg.instance.id.split("|") // 0: portID 1: reqID 2: order
 		var port = port_cs[infos[0]]
 		if (!port) return
@@ -179,7 +179,7 @@ chrome.runtime.onConnect.addListener((port) => {
 			instanceRequest.for = mod_id
 			if (!mod) return
 
-			DEBUG && console.log('dispatch', mod_id, instanceRequest);
+			console.log('dispatch', mod_id, instanceRequest);
 
 			mod.port.postMessage({
 				type: "request",

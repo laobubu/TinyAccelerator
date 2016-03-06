@@ -164,7 +164,7 @@
 			}
 		}
 
-		DEBUG && console.log('request ' + text)
+		console.log('request ' + text)
 
 
 		port.postMessage(request)

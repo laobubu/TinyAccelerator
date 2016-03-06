@@ -21,7 +21,7 @@ define dynamic-bind
 $(2): $(1)
 endef
 
-.PHONY: all clean dist i18n scss normal_files
+.PHONY: all clean dist pack i18n scss normal_files
 
 all: dist
 
@@ -29,6 +29,11 @@ dist: i18n scss normal_files
 i18n: $(DST_DIR)/_locales
 normal_files: $(DST_FILES)
 scss: $(DST_FILES_SCSS)
+
+pack: dist
+	rm -f $(DST_DIR)/libs/vue/vue.js
+	sed -i $(DST_DIR)/config/config.html -e 's/vue.js/vue.min.js/'
+	for i in `find $(DST_DIR) \( -name '*.js' ! -name '*.min.js' \)`; do uglifyjs -m -c drop_console $$i -o $$i ; done
 
 $(DST_DIR)/_locales: $(wildcard $(SRC_DIR)/_locales/*)
 	-rm -rf $(DST_DIR)/_locales
