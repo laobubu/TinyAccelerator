@@ -37,6 +37,12 @@ function ModsTranslator() {
 			})
 	})
 
+	const re = {
+		word: /^[a-zA-Z][\w-]+$/,
+		sentence: /^[a-zA-Z][-\w\s"'\.,:;!?\(\)]+$/,
+		domain: /\w\.[a-z]{2}/,
+	}
+
 	function _create_instance(req) {
 		return new Promise((resolve) => {
 			var txt = req.text
@@ -44,17 +50,15 @@ function ModsTranslator() {
 
 			switch (~~conf.when) {
 				case 0: //english words
-					if (!/^[a-zA-Z][\w-]+$/.test(txt)) return
+					if (!re.word.test(txt)) return
 					break;
 				case 1: //english sentence
-					if (!/^[-\w\s"'\.,:;!?\(\)]+$/.test(txt)) return
-					if (/\w\.[a-z]{2}/.test(txt)) return //Domains
+					if (!re.sentence.test(txt)) return
+					if (re.domain.test(txt)) return //Domains
 					break;
 				case 2: //non-english
+					if (!/\w+/.test(txt)) return
 					break
-			}
-			if (!/\w+/.test(txt)) {
-				return
 			}
 
 			var api = (conf.api === "google") ? google : youdao;
@@ -75,7 +79,9 @@ function ModsTranslator() {
 						button: {
 							text: btn,
 							event: {
-								click: `window.open("http://dict.cn/${encodeURIComponent(txt) }")`
+								click: `
+window.open("http://dict.cn/${encodeURIComponent(txt) }")
+`
 							}
 						}
 					}

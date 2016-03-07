@@ -16,7 +16,7 @@ function ModsSearch() {
 			button: {
 				text: chrome.i18n.getMessage("Search"),
 				event: {
-					click: `window.open("https://www.google.com/search?q=${encodeURIComponent(req.text)}")`
+					click: `chrome.runtime.sendMessage({type:"search=>open",text:${ JSON.stringify(req.text) }})`
 				}
 			}
 		}
@@ -42,6 +42,17 @@ function ModsSearch() {
 			port.postMessage({
 				type: "profile",
 				profile: _profile
+			})
+		}
+	})
+
+	chrome.runtime.onMessage.addListener((msg, sender, resp) => {
+		if (msg.type === "search=>open") {
+			let text = msg.text
+			chrome.tabs.create({
+				index: (sender.tab.index + 1),
+				windowId: sender.tab.windowId,
+				url: "https://www.google.com/search?q=" + encodeURIComponent(text)
 			})
 		}
 	})
