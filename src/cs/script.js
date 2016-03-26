@@ -64,16 +64,17 @@
 
 	function setBoxVisibility(visible) {
 		if (visible === box.visible) return
-		box.visible = visible
 
-		if (visible) {
+		if (box.visible = visible) {
 			document.body.appendChild(container);
 			container.style.display = 'block';
 		} else {
 			container.parentElement && container.parentElement.removeChild(container);
 			container.style.display = 'none';
+			box.position.x = box.position.y = 0;
 		}
 	}
+	
 	function setBoxPosition() {
 		if (!box.visible) return
 
@@ -83,23 +84,26 @@
 		var left = rect.left
 		var top = rect.top
 
-		// if (refPosition) {
-		let refX = box.position.x,
-			refY = box.position.y,
-			nearestDistance = 0x1A0BB00
-		left = refX
-		for (let i = 0; i !== rects.length; i++) {
-			let ri = rects[i]
-			if (ri.left <= refX && refX <= ri.right) {
-				let riDistance = Math.abs(ri.top + (ri.height / 2) - refY)
-				if (riDistance < nearestDistance) {
-					top = ri.top
-					rect = ri
-					nearestDistance = riDistance
+		if (box.position.x || box.position.y) {
+			let refX = box.position.x,
+				refY = box.position.y,
+				nearestDistance = 0x1A0BB00
+			left = refX
+			for (let i = 0; i !== rects.length; i++) {
+				let ri = rects[i]
+				if (ri.left <= refX && refX <= ri.right) {
+					let riDistance = Math.abs(ri.top + (ri.height / 2) - refY)
+					if (riDistance < nearestDistance) {
+						top = ri.top
+						rect = ri
+						nearestDistance = riDistance
+					}
 				}
 			}
+		} else {
+			left = rect.left
+			top = rect.top
 		}
-		// }
 
 		if ((top - box.size.height) < 0) {
 			top += rect.height
@@ -123,24 +127,23 @@
 		var range = selection.rangeCount && selection.getRangeAt(0)
 
 		if (selection.isCollapsed) {
-			setBoxVisibility(
-				range && (
-					range.startContainer.childNodes[range.startOffset] === container ||
-					range.startContainer === box.div ||
-					range.startContainer.compareDocumentPosition(box.div) === Node.DOCUMENT_POSITION_CONTAINED_BY
-					) || false
-				)
-			return
+			var focusOnBox =
+				range.startContainer === box.div ||
+				range.startContainer.compareDocumentPosition(box.div) === Node.DOCUMENT_POSITION_CONTAINED_BY ||
+				range.startContainer.childNodes[range.startOffset] === container
+
+			setBoxVisibility((range && focusOnBox) || false);
+			return false;
 		}
 
-		if (box.ghost) return
+		if (box.ghost) return false;
 
 		var currentTime = +new Date()
 		if (onSelectionChange.trigNext > currentTime) {
 			onSelectionChange.trigArgCache = ev
-			if (onSelectionChange.trigTimeout) return
+			if (onSelectionChange.trigTimeout) return false;
 			onSelectionChange.trigTimeout = setTimeout(onSelectionChange.trigTimeoutFn, onSelectionChange.trigNext - currentTime)
-			return
+			return false;
 		}
 		onSelectionChange.trigNext = currentTime + onSelectionChange.trigSpan
 
@@ -152,7 +155,7 @@
 		var html = tempDiv.innerHTML
 		var text = tempDiv.innerText.trim()
 
-		if (!text.length) return
+		if (!text.length) return false;
 
 		box.view.innerHTML = ""
 		box.entry.innerHTML = ""
@@ -171,8 +174,8 @@
 
 		console.log('request ' + text)
 
-
 		port.postMessage(request)
+		return true
 	}
 	onSelectionChange.trigSpan = 300
 	onSelectionChange.trigNext = 0
@@ -278,7 +281,9 @@
 		return currentID
 	}
 
-	document.addEventListener('selectionchange', onSelectionChange, true)
+	document.addEventListener('selectionchange', (ev)=>{
+		onSelectionChange(ev);
+	}, true);
 	document.body.addEventListener('mousedown', (ev) => {
 		if (!box.ghost && ev.target !== container) {
 			box.ghost = true
@@ -290,12 +295,13 @@
 		if (box.ghost && ev.target !== container) {
 			box.ghost = false
 			box.div.classList.remove('ghost')
-			box.position.x = ev.pageX - document.body.scrollLeft
-			box.position.y = ev.pageY - document.body.scrollTop
-			onSelectionChange(ev)
-			setBoxPosition()
+			if (onSelectionChange(ev)) {
+				box.position.x = ev.pageX - document.body.scrollLeft
+				box.position.y = ev.pageY - document.body.scrollTop
+				setBoxPosition()
+			}
 		}
-	}, true)
+	}, true);
 
-	setBoxVisibility(false)
+	setBoxVisibility(false);
 })();
