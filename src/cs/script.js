@@ -5,7 +5,7 @@
 	var container = document.createElement('div')
 	var box = {
 		ghost: false,
-		visible: true,
+		visible: false,
 		/** the `#box` element */
 		div: container,
 		/** the `#view` element */
@@ -51,7 +51,6 @@
 	chrome.runtime.sendMessage("box", (box_info) => {
 		root.innerHTML = '<style style="display:none">\n' + box_info.style + '\n</style>' + box_info.html
 
-		document.body.appendChild(container)
 		box.div = root.querySelector('#box')
 		box.view = root.querySelector('#view')
 		box.entry = root.querySelector('#entry')
@@ -63,11 +62,17 @@
 	var selection = window.getSelection()
 	var tempDiv = document.createElement('div')
 
-	function setBoxVisibility(visibile) {
-		if (visibile === box.visible) return
-		box.visible = visibile
+	function setBoxVisibility(visible) {
+		if (visible === box.visible) return
+		box.visible = visible
 
-		container.style.display = visibile ? 'block' : 'none'
+		if (visible) {
+			document.body.appendChild(container);
+			container.style.display = 'block';
+		} else {
+			container.parentElement && container.parentElement.removeChild(container);
+			container.style.display = 'none';
+		}
 	}
 	function setBoxPosition() {
 		if (!box.visible) return
