@@ -23,7 +23,7 @@ var app = {
 Vue.config.debug = true
 
 function OpenURL(url) {
-	window.postMessage({ type: "open?", url: url }, "*")
+	window.top.postMessage({ type: "open?", url: url }, "*")
 }
 
 app = new Vue({

@@ -30,7 +30,7 @@ function uniTranslateAll(directMode) {
 		return
 	}
 
-	window.postMessage({
+	window.top.postMessage({
 		type: "i18n?",
 		keys: Object.keys(keys)
 	}, "*")
@@ -65,7 +65,7 @@ function sendMessage(message) {
 	return new Promise((resolve) => {
 		let timestamp = (+new Date()).toString(36) + Math.random()
 		sendMessage_resolvers[timestamp] = resolve
-		window.postMessage({
+		window.top.postMessage({
 			type: "sm?",
 			timestamp: timestamp,
 			message: message
