@@ -33,6 +33,12 @@ interface Profile {
  */
 type EventInfo = { [eventName: string]: string };
 
+/** the `this` object of functions that generated from EventInfo */
+interface InstanceEventThis {
+	button: HTMLElement;
+	view: HTMLElement;
+}
+
 interface Instance {
 	/** the view */
 	view?: string | {

@@ -36,3 +36,33 @@ declare var app: {
 };
 
 declare function local_connect(options: { name: string }): chrome.runtime.Port;
+
+declare interface TinyAccBox {
+	visible: boolean;
+	position: {
+		x: number,
+		y: number,
+		rects: ClientRectList
+	}
+	size: {
+		width: number,
+		height: number
+	}
+	
+	/** host container on page */
+	container: HTMLDivElement;
+	root: DocumentFragment;
+	
+	div: HTMLDivElement;
+	view: HTMLDivElement;
+	
+	/** the div containing entry buttons */
+	entry: HTMLDivElement;
+	
+	setVisibility(boolean);
+}
+
+declare interface TinyAccViewManager{
+	box: TinyAccBox;
+	monodramaLast: TinyAcc.InstanceEventThis;
+}
