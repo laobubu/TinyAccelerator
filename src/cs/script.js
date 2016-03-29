@@ -320,6 +320,12 @@ class TinyAccViewManager {
 		/** @type {TinyAccViewManager} */
 		var viewMgr;
 
+		// Remove all unsafe API from Chrome
+		var chrome = window.chrome;
+		window.chrome = {
+			runtime: chrome.runtime
+		};
+
 		chrome.runtime.sendMessage("box", (box_info) => {
 			box = new TinyAccBox(box_info);
 			box.setVisibility(false);
